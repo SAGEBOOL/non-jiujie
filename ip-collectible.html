@@ -1,0 +1,473 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>IP+潮玩 | NON-九界·九界归尘</title>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+SC:wght@400;700;900&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="https://unpkg.com/aos@2.3.4/dist/aos.css" />
+
+  <style>
+    @font-face {
+      font-family: 'Kravitz';
+      src: url('fonts/KRAVITZ_.TTF') format('truetype');
+      font-weight: 400; font-style: normal; font-display: swap;
+    }
+    @font-face {
+      font-family: 'Kravitz';
+      src: url('fonts/KRAVT___.TTF') format('truetype');
+      font-weight: 300; font-style: normal; font-display: swap;
+    }
+    @font-face {
+      font-family: 'Kravitz';
+      src: url('fonts/KRAVET__.TTF') format('truetype');
+      font-weight: 400; font-style: italic; font-display: swap;
+    }
+
+    :root {
+      --red: #FF2D20;
+      --cyan: #00F5FF;
+      --black: #0A0A0A;
+      --ink: #111111;
+      --white: #F5F5F0;
+      --gray: #1A1A1A;
+      --muted: #555555;
+      --font-en: 'Kravitz', sans-serif;
+      --font-cn: 'Noto Sans SC', sans-serif;
+    }
+
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+    body {
+      background: var(--black);
+      color: var(--white);
+      font-family: var(--font-cn);
+      line-height: 1.6;
+      cursor: none;
+      overflow-x: hidden;
+    }
+    a { color: inherit; text-decoration: none; }
+    img { display: block; max-width: 100%; }
+
+    /* ─── CURSOR ──────────────────────────────────────────── */
+    #cursor-dot  { width: 8px; height: 8px; background: var(--red); border-radius: 50%; position: fixed; top: 0; left: 0; pointer-events: none; z-index: 9999; transform: translate(-50%,-50%); transition: width .15s, height .15s, background .15s; }
+    #cursor-ring { width: 36px; height: 36px; border: 2px solid var(--cyan); border-radius: 50%; position: fixed; top: 0; left: 0; pointer-events: none; z-index: 9998; transform: translate(-50%,-50%); transition: width .35s cubic-bezier(.17,.67,.35,1.1), height .35s cubic-bezier(.17,.67,.35,1.1), transform .12s linear, opacity .3s; opacity: .7; }
+    body.cursor-hover #cursor-dot  { width: 12px; height: 12px; }
+    body.cursor-hover #cursor-ring { width: 56px; height: 56px; border-color: var(--red); opacity: 1; }
+
+    /* ─── PROGRESS BAR ───────────────────────────────────── */
+    #progress-bar { position: fixed; top: 0; left: 0; height: 2px; width: 0; background: linear-gradient(90deg, var(--red), var(--cyan)); z-index: 10000; transition: width .1s linear; }
+
+    /* ─── NAVBAR ─────────────────────────────────────────── */
+    nav {
+      position: fixed; top: 0; left: 0; right: 0;
+      display: flex; align-items: center; justify-content: space-between;
+      padding: 0 48px;
+      height: 72px;
+      background: rgba(10,10,10,.92);
+      backdrop-filter: blur(12px);
+      border-bottom: 1px solid rgba(245,245,240,.06);
+      z-index: 1000;
+    }
+    .nav-logo {
+      font-family: var(--font-en);
+      font-size: 22px; letter-spacing: 2px;
+      color: var(--white);
+    }
+    .nav-logo span { color: var(--red); }
+    .nav-back {
+      display: flex; align-items: center; gap: 10px;
+      font-size: 12px; letter-spacing: 2px;
+      color: var(--cyan);
+      font-family: var(--font-en);
+      border: 1px solid rgba(0,245,255,.3);
+      padding: 8px 20px;
+      transition: background .2s, color .2s;
+    }
+    .nav-back:hover { background: var(--cyan); color: var(--black); }
+    .nav-back::before { content: '←'; font-size: 14px; }
+
+    /* ─── PAGE HERO ──────────────────────────────────────── */
+    .page-hero {
+      margin-top: 72px;
+      padding: 100px 64px 80px;
+      border-bottom: 1px solid rgba(245,245,240,.06);
+      position: relative;
+      overflow: hidden;
+    }
+    .page-hero::before {
+      content: 'COLLECTIBLE';
+      position: absolute; right: -20px; top: 50%; transform: translateY(-50%);
+      font-family: var(--font-en);
+      font-size: clamp(80px, 14vw, 200px);
+      color: rgba(0,245,255,.05);
+      letter-spacing: -4px;
+      pointer-events: none;
+      user-select: none;
+    }
+    .page-label {
+      font-family: var(--font-en);
+      font-size: 11px; letter-spacing: 4px;
+      color: var(--cyan);
+      margin-bottom: 24px;
+    }
+    .page-title {
+      font-family: var(--font-en);
+      font-size: clamp(52px, 8vw, 120px);
+      line-height: .88;
+      font-weight: 400;
+      margin-bottom: 32px;
+    }
+    .page-title .t-white { color: var(--white); display: block; }
+    .page-title .t-red   { color: var(--red); display: block; }
+    .page-desc {
+      max-width: 580px;
+      font-size: 15px; line-height: 1.8;
+      color: rgba(245,245,240,.6);
+    }
+
+    /* ─── CONTENT WRAP ───────────────────────────────────── */
+    .content-wrap {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 80px 64px;
+    }
+
+    .content-block {
+      margin-bottom: 80px;
+      border-bottom: 1px solid rgba(245,245,240,.06);
+      padding-bottom: 60px;
+    }
+    .content-block:last-child { border-bottom: none; margin-bottom: 0; }
+
+    .content-index {
+      font-family: var(--font-en);
+      font-size: 11px; letter-spacing: 3px;
+      color: var(--cyan);
+      margin-bottom: 16px;
+    }
+
+    .content-title {
+      font-size: 28px;
+      font-weight: 700;
+      margin-bottom: 20px;
+      color: var(--white);
+    }
+
+    .content-subtitle {
+      font-size: 16px;
+      color: var(--cyan);
+      margin-bottom: 24px;
+    }
+
+    .content-list {
+      list-style: none;
+      padding: 0;
+    }
+    .content-list li {
+      margin-bottom: 16px;
+      padding-left: 20px;
+      position: relative;
+      color: rgba(245,245,240,.7);
+      font-size: 14px;
+      line-height: 1.8;
+    }
+    .content-list li::before {
+      content: '';
+      position: absolute;
+      left: 0; top: 8px;
+      width: 6px; height: 6px;
+      background: var(--red);
+      border-radius: 50%;
+    }
+    .content-list li strong {
+      color: var(--white);
+      font-weight: 700;
+    }
+
+    .provided-section {
+      margin-top: 32px;
+    }
+    .provided-label {
+      font-size: 15px;
+      color: var(--cyan);
+      margin-bottom: 16px;
+      font-family: var(--font-en);
+      letter-spacing: 1px;
+    }
+    .provided-list {
+      list-style: none;
+      padding: 0;
+    }
+    .provided-list li {
+      margin-bottom: 10px;
+      padding-left: 20px;
+      position: relative;
+      color: rgba(245,245,240,.65);
+      font-size: 14px;
+      line-height: 1.8;
+    }
+    .provided-list li::before {
+      content: '◆';
+      position: absolute;
+      left: 0;
+      color: var(--cyan);
+      font-size: 10px;
+      top: 2px;
+    }
+
+    /* ─── CTA ──────────────────────────────────────────────── */
+    .masters-cta {
+      padding: 100px 64px;
+      text-align: center;
+      border-top: 1px solid rgba(245,245,240,.06);
+      position: relative;
+    }
+    .masters-cta::before {
+      content: 'JOIN US';
+      position: absolute;
+      top: 50%; left: 50%;
+      transform: translate(-50%, -50%);
+      font-family: var(--font-en);
+      font-size: clamp(60px, 10vw, 140px);
+      color: rgba(255,45,32,.04);
+      letter-spacing: -4px;
+      pointer-events: none;
+    }
+    .masters-cta-label {
+      font-family: var(--font-en);
+      font-size: 11px;
+      letter-spacing: 4px;
+      color: var(--cyan);
+      margin-bottom: 32px;
+    }
+    .masters-cta h2 {
+      font-size: 32px;
+      font-weight: 700;
+      margin-bottom: 16px;
+    }
+    .masters-cta em {
+      color: var(--red);
+      font-style: normal;
+    }
+    .masters-cta p {
+      max-width: 500px;
+      margin: 0 auto 32px;
+      color: rgba(245,245,240,.5);
+      font-size: 15px;
+    }
+    .btn-cta {
+      display: inline-block;
+      padding: 14px 36px;
+      background: var(--red);
+      color: var(--white);
+      font-family: var(--font-en);
+      font-size: 13px;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      border: none;
+      cursor: none;
+      transition: background .2s, transform .15s;
+    }
+    .btn-cta:hover { background: #e0281a; transform: scale(1.03); }
+
+    /* ─── FOOTER ───────────────────────────────────────────── */
+    .page-footer {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 32px 64px;
+      border-top: 1px solid rgba(245,245,240,.06);
+      font-size: 12px;
+      color: var(--muted);
+      font-family: var(--font-en);
+      letter-spacing: 1px;
+    }
+    .page-footer a {
+      color: var(--cyan);
+      transition: color .2s;
+    }
+    .page-footer a:hover { color: var(--white); }
+
+    /* ─── RESPONSIVE ─────────────────────────────────────── */
+    @media (max-width: 1024px) {
+      .content-wrap { padding: 60px 40px; }
+      .page-hero { padding: 80px 40px 60px; }
+    }
+    @media (max-width: 768px) {
+      .page-hero { padding: 80px 24px 60px; }
+      .content-wrap { padding: 60px 24px; }
+      .masters-cta { padding: 80px 24px; }
+      .page-footer { padding: 24px; flex-direction: column; gap: 16px; text-align: center; }
+      .page-hero::before { display: none; }
+      .masters-cta::before { display: none; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- ─── CURSOR ──────────────────────────────────────────────── -->
+<div id="cursor-dot" aria-hidden="true"></div>
+<div id="cursor-ring" aria-hidden="true"></div>
+
+<!-- Progress bar -->
+<div id="progress-bar" aria-hidden="true"></div>
+
+<!-- ═══════════════ NAVBAR ═══════════════ -->
+<nav>
+  <div class="nav-logo">NON<span>-九界</span></div>
+  <a href="index.html#cloudtour" class="nav-back">BACK TO IP+COLLECTIBLE</a>
+</nav>
+
+<!-- ─── PAGE HERO ───────────────────────────────────────────── -->
+<section class="page-hero">
+  <div class="page-label">IP + COLLECTIBLE · 合作内容</div>
+  <h1 class="page-title">
+    <span class="t-white">IP</span>
+    <span class="t-red">+潮玩</span>
+  </h1>
+  <p class="page-desc" data-aos="fade-up">
+    将九界角色与潮玩设计深度融合，打造修仙主题手办、盲盒与限定收藏品。
+  </p>
+</section>
+
+<!-- ─── CONTENT ──────────────────────────────────────────────── -->
+<div class="content-wrap">
+
+  <!-- 1. 手办模型 -->
+  <div class="content-block" data-aos="fade-up">
+    <div class="content-index">01 · FIGURE MODEL</div>
+    <div class="content-title">手办模型</div>
+    <div class="content-subtitle">授权内容</div>
+    <ul class="content-list">
+      <li><strong>角色形象授权：</strong>小说主要角色的立体化开发权（1/7、1/8等比例）</li>
+      <li><strong>造型授权：</strong>角色经典姿势、战斗姿态、日常造型的使用权</li>
+      <li><strong>场景授权：</strong>角色标志性场景、战斗场面的立体化呈现权</li>
+      <li><strong>材质授权：</strong>特定材质表现（透明件、金属件、发光件等）的使用权</li>
+    </ul>
+    <div class="provided-section">
+      <div class="provided-label">我方提供</div>
+      <ul class="provided-list">
+        <li>角色三视图（正面、侧面、背面，含比例尺）</li>
+        <li>高精度原画（分辨率≥300dpi，分层文件）</li>
+        <li>角色配色方案（Pantone色卡或CMYK/RGB值）</li>
+        <li>武器/道具详细设定（尺寸、材质、纹样）</li>
+        <li>经典场景描述（适合做成地台或背景板）</li>
+      </ul>
+    </div>
+  </div>
+
+  <!-- 2. 盲盒系列 -->
+  <div class="content-block" data-aos="fade-up" data-aos-delay="80">
+    <div class="content-index">02 · BLIND BOX SERIES</div>
+    <div class="content-title">盲盒系列</div>
+    <div class="content-subtitle">授权内容</div>
+    <ul class="content-list">
+      <li><strong>Q版形象授权：</strong>角色Q版化、萌化设计的开发权</li>
+      <li><strong>系列开发授权：</strong>按主题（如"凡界篇""九界篇"）开发系列盲盒的权利</li>
+      <li><strong>隐藏款授权：</strong>开发隐藏款、secret款、大隐藏款的权利</li>
+      <li><strong>配件授权：</strong>为盲盒角色设计专属配件、道具的权利</li>
+    </ul>
+    <div class="provided-section">
+      <div class="provided-label">我方提供</div>
+      <ul class="provided-list">
+        <li>角色Q版设计参考（2-3头身比例建议）</li>
+        <li>盲盒角色候选清单（按人气、辨识度、可玩性排序）</li>
+        <li>主题系列建议（如"初入仙途"、"宗门大比"、"九界游历"）</li>
+        <li>隐藏款创意方向（限定造型、变色版、透明版等）</li>
+        <li>角色性格标签（便于设计表情和姿势）</li>
+      </ul>
+    </div>
+  </div>
+
+  <!-- 3. 限定收藏 -->
+  <div class="content-block" data-aos="fade-up" data-aos-delay="160">
+    <div class="content-index">03 · LIMITED COLLECTIBLE</div>
+    <div class="content-title">限定收藏</div>
+    <div class="content-subtitle">授权内容</div>
+    <ul class="content-list">
+      <li><strong>节日限定授权：</strong>春节、中秋、情人节等节日主题限定款的开发权</li>
+      <li><strong>剧情限定授权：</strong>小说关键剧情节点（如主角突破、大战胜利）纪念款开发权</li>
+      <li><strong>周年纪念授权：</strong>IP周年、小说完结周年等纪念款开发权</li>
+      <li><strong>编号限定授权：</strong>发行带独立编号的限量收藏款的权利</li>
+    </ul>
+    <div class="provided-section">
+      <div class="provided-label">我方提供</div>
+      <ul class="provided-list">
+        <li>节日/剧情节点清单（适合开发限定款的时间点）</li>
+        <li>纪念主题创意建议</li>
+        <li>限定包装设计方案</li>
+        <li>收藏证书/身份卡设计模板</li>
+        <li>编号规则建议</li>
+      </ul>
+    </div>
+  </div>
+
+  <!-- 4. 设计师联名 -->
+  <div class="content-block" data-aos="fade-up" data-aos-delay="240">
+    <div class="content-index">04 · DESIGNER COLLABORATION</div>
+    <div class="content-title">设计师联名</div>
+    <div class="content-subtitle">授权内容</div>
+    <ul class="content-list">
+      <li><strong>联名设计授权：</strong>邀请外部设计师/艺术家进行联名创作的授权</li>
+      <li><strong>风格融合授权：</strong>将IP元素与设计师个人风格融合的权利</li>
+      <li><strong>艺术家系列授权：</strong>开发"艺术家系列"限量款的权利</li>
+      <li><strong>展览授权：</strong>举办联名款展览、快闪活动的权利</li>
+    </ul>
+    <div class="provided-section">
+      <div class="provided-label">我方提供</div>
+      <ul class="provided-list">
+        <li>IP核心视觉元素（LOGO、标志性图案、角色剪影）</li>
+        <li>设计规范文档（可修改范围、必须保留元素、禁止事项）</li>
+        <li>设计师候选推荐（如有）</li>
+        <li>联名宣传配合（官方渠道曝光）</li>
+      </ul>
+    </div>
+  </div>
+
+</div>
+
+<!-- ─── CTA ──────────────────────────────────────────────────── -->
+<section class="masters-cta">
+  <div class="masters-cta-label">JOIN US · 加入我们</div>
+  <h2>成为我们的<em>IP+潮玩合作伙伴</em></h2>
+  <p>加入九界，让潮玩IP在手办与盲盒领域延续，找到属于修仙文化的当代表达。</p>
+  <a href="index.html#cloudtour" class="btn-cta">了解潮玩IP</a>
+</section>
+
+<!-- ─── FOOTER ───────────────────────────────────────────────── -->
+<footer class="page-footer">
+  <span>© 2026 九界归尘 · DSArt+AI STUDIO · All rights reserved.</span>
+  <a href="index.html">← 返回首页</a>
+</footer>
+
+<!-- ─── AOS ──────────────────────────────────────────────────── -->
+<script src="https://unpkg.com/aos@2.3.4/dist/aos.js"></script>
+<script>
+  AOS.init({ duration: 700, once: true, offset: 60 });
+
+  const dot  = document.getElementById('cursor-dot');
+  const ring = document.getElementById('cursor-ring');
+  let mx = 0, my = 0, rx = 0, ry = 0;
+  document.addEventListener('mousemove', e => { mx = e.clientX; my = e.clientY; dot.style.left = mx + 'px'; dot.style.top = my + 'px'; });
+  (function animRing() {
+    rx += (mx - rx) * .12; ry += (my - ry) * .12;
+    ring.style.left = rx + 'px'; ring.style.top = ry + 'px';
+    requestAnimationFrame(animRing);
+  })();
+  document.querySelectorAll('a, button, .content-block').forEach(el => {
+    el.addEventListener('mouseenter', () => document.body.classList.add('cursor-hover'));
+    el.addEventListener('mouseleave', () => document.body.classList.remove('cursor-hover'));
+  });
+
+  const bar = document.getElementById('progress-bar');
+  window.addEventListener('scroll', () => {
+    const pct = window.scrollY / (document.body.scrollHeight - window.innerHeight) * 100;
+    bar.style.width = pct + '%';
+  });
+</script>
+</body>
+</html>
