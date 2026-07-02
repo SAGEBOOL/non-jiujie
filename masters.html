@@ -112,11 +112,11 @@
       overflow: hidden;
     }
     .page-hero::before {
-      content: 'MASTERS';
+      content: 'GAMING IP';
       position: absolute; right: -20px; top: 50%; transform: translateY(-50%);
       font-family: var(--font-en);
       font-size: clamp(80px, 14vw, 200px);
-      color: rgba(255,45,32,.05);
+      color: rgba(0,245,255,.05);
       letter-spacing: -4px;
       pointer-events: none;
       user-select: none;
@@ -141,363 +141,234 @@
       font-size: 15px; line-height: 1.8;
       color: rgba(245,245,240,.6);
     }
-    .master-count {
-      position: absolute; right: 64px; bottom: 60px;
-      font-family: var(--font-en);
-      font-size: 80px; line-height: 1;
-      color: rgba(0,245,255,.08);
-      letter-spacing: -4px;
+
+    /* ─── CONTENT WRAP ───────────────────────────────────────── */
+    .content-wrap {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 80px 64px;
     }
 
-    /* ─── MASTER SECTIONS ────────────────────────────────────── */
-    .masters-wrap { max-width: 1200px; margin: 0 auto; padding: 80px 64px; }
+    .content-block {
+      margin-bottom: 80px;
+      border-bottom: 1px solid rgba(245,245,240,.06);
+      padding-bottom: 60px;
+    }
+    .content-block:last-child { border-bottom: none; margin-bottom: 0; }
 
-    .master-block {
-      display: grid;
-      grid-template-columns: 380px 1fr;
-      gap: 0;
-      margin-bottom: 2px;
-      background: var(--gray);
-      overflow: hidden;
-      transition: background .3s;
-    }
-    .master-block:hover { background: #1c1c1c; }
-    .master-block:nth-child(even) { grid-template-columns: 1fr 380px; }
-    .master-block:nth-child(even) .master-img-wrap { order: 2; }
-    .master-block:nth-child(even) .master-info    { order: 1; }
-
-    .master-img-wrap {
-      position: relative;
-      overflow: hidden;
-      min-height: 420px;
-    }
-    .master-img-wrap img {
-      width: 100%; height: 100%;
-      object-fit: cover;
-      object-position: top center;
-      transition: transform .6s ease;
-      filter: grayscale(20%);
-    }
-    .master-block:hover .master-img-wrap img { transform: scale(1.04); filter: grayscale(0%); }
-    .master-img-label {
-      position: absolute; bottom: 0; left: 0; right: 0;
-      padding: 40px 28px 20px;
-      background: linear-gradient(to top, rgba(10,10,10,.85), transparent);
-    }
-    .master-idx {
+    .content-index {
       font-family: var(--font-en);
       font-size: 11px; letter-spacing: 3px;
       color: var(--cyan);
+      margin-bottom: 16px;
     }
 
-    .master-info {
-      padding: 56px 52px;
-      display: flex;
-      flex-direction: column;
-      justify-content: center;
+    .content-title {
+      font-size: 28px;
+      font-weight: 700;
+      margin-bottom: 20px;
+      color: var(--white);
+    }
+
+    .content-subtitle {
+      font-size: 16px;
+      color: var(--cyan);
+      margin-bottom: 24px;
+    }
+
+    .content-list {
+      list-style: none;
+      padding: 0;
+    }
+    .content-list li {
+      margin-bottom: 16px;
+      padding-left: 20px;
+      position: relative;
+      color: rgba(245,245,240,.7);
+      font-size: 14px;
+      line-height: 1.8;
+    }
+    .content-list li::before {
+      content: '';
+      position: absolute;
+      left: 0; top: 8px;
+      width: 6px; height: 6px;
+      background: var(--red);
+      border-radius: 50%;
+    }
+    .content-list li strong {
+      color: var(--white);
+      font-weight: 700;
+    }
+
+    /* ─── CTA ──────────────────────────────────────────────────── */
+    .masters-cta {
+      padding: 100px 64px;
+      text-align: center;
+      border-top: 1px solid rgba(245,245,240,.06);
       position: relative;
     }
-    .master-block:nth-child(odd)  .master-info { border-left: 3px solid var(--red); }
-    .master-block:nth-child(even) .master-info { border-right: 3px solid var(--cyan); }
-
-    .master-craft {
+    .masters-cta::before {
+      content: 'JOIN US';
+      position: absolute;
+      top: 50%; left: 50%;
+      transform: translate(-50%, -50%);
       font-family: var(--font-en);
-      font-size: 11px; letter-spacing: 4px;
-      color: var(--cyan);
-      margin-bottom: 16px;
-      text-transform: uppercase;
-    }
-    .master-name {
-      font-family: var(--font-en);
-      font-size: clamp(40px, 6vw, 72px);
-      line-height: 1;
-      font-weight: 400;
-      color: var(--white);
-      margin-bottom: 8px;
-      letter-spacing: -1px;
-    }
-    .master-name-cn {
-      font-size: 14px; letter-spacing: 6px;
-      color: rgba(245,245,240,.4);
-      margin-bottom: 28px;
-    }
-    .master-bio {
-      font-size: 14px; line-height: 1.9;
-      color: rgba(245,245,240,.7);
-      max-width: 520px;
-    }
-    .master-tags {
-      display: flex; flex-wrap: wrap; gap: 8px;
-      margin-top: 28px;
-    }
-    .master-tag {
-      font-size: 10px; letter-spacing: 2px;
-      padding: 4px 14px;
-      border: 1px solid rgba(245,245,240,.12);
-      color: var(--muted);
-    }
-    .master-block:nth-child(odd)  .master-tag:first-child { border-color: var(--red); color: var(--red); }
-    .master-block:nth-child(even) .master-tag:first-child { border-color: var(--cyan); color: var(--cyan); }
-
-    /* divider */
-    .section-divider {
-      height: 1px;
-      background: linear-gradient(90deg, var(--red), transparent 40%, transparent 60%, var(--cyan));
-      margin: 0;
-    }
-
-    /* ─── BOTTOM CTA ─────────────────────────────────────────── */
-    .masters-cta {
-      text-align: center;
-      padding: 100px 64px;
-      border-top: 1px solid rgba(245,245,240,.06);
+      font-size: clamp(60px, 10vw, 140px);
+      color: rgba(255,45,32,.04);
+      letter-spacing: -4px;
+      pointer-events: none;
     }
     .masters-cta-label {
       font-family: var(--font-en);
-      font-size: 11px; letter-spacing: 4px;
-      color: var(--muted);
-      margin-bottom: 24px;
+      font-size: 11px;
+      letter-spacing: 4px;
+      color: var(--cyan);
+      margin-bottom: 32px;
     }
     .masters-cta h2 {
-      font-family: var(--font-en);
-      font-size: clamp(36px, 5vw, 72px);
-      font-weight: 400;
-      margin-bottom: 20px;
-      line-height: 1;
+      font-size: 32px;
+      font-weight: 700;
+      margin-bottom: 16px;
     }
-    .masters-cta h2 em { font-style: normal; color: var(--red); }
+    .masters-cta em {
+      color: var(--red);
+      font-style: normal;
+    }
     .masters-cta p {
-      font-size: 15px;
+      max-width: 500px;
+      margin: 0 auto 32px;
       color: rgba(245,245,240,.5);
-      max-width: 480px;
-      margin: 0 auto 40px;
-      line-height: 1.8;
+      font-size: 15px;
     }
     .btn-cta {
-      display: inline-flex; align-items: center; gap: 12px;
+      display: inline-block;
+      padding: 14px 36px;
       background: var(--red);
       color: var(--white);
       font-family: var(--font-en);
-      font-size: 13px; letter-spacing: 3px;
-      padding: 16px 40px;
+      font-size: 13px;
+      letter-spacing: 2px;
       text-transform: uppercase;
-      transition: background .2s, color .2s;
-      min-width: 200px;
-      justify-content: center;
+      border: none;
+      cursor: none;
+      transition: background .2s, transform .15s;
     }
-    .btn-cta:hover { background: var(--cyan); color: var(--black); }
+    .btn-cta:hover { background: #e0281a; transform: scale(1.03); }
 
-    /* ─── FOOTER ─────────────────────────────────────────────── */
+    /* ─── FOOTER ───────────────────────────────────────────────── */
     .page-footer {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
       padding: 32px 64px;
       border-top: 1px solid rgba(245,245,240,.06);
-      display: flex; align-items: center; justify-content: space-between;
+      font-size: 12px;
+      color: var(--muted);
       font-family: var(--font-en);
-      font-size: 11px; letter-spacing: 1px;
-      color: rgba(245,245,240,.2);
+      letter-spacing: 1px;
     }
+    .page-footer a {
+      color: var(--cyan);
+      transition: color .2s;
+    }
+    .page-footer a:hover { color: var(--white); }
 
     /* ─── RESPONSIVE ─────────────────────────────────────────── */
     @media (max-width: 1024px) {
-      .master-block,
-      .master-block:nth-child(even) {
-        grid-template-columns: 1fr;
-      }
-      .master-block:nth-child(even) .master-img-wrap { order: 1; }
-      .master-block:nth-child(even) .master-info    { order: 2; }
-      .master-img-wrap { min-height: 320px; }
-      .master-block:nth-child(even) .master-info { border-right: none; border-left: 3px solid var(--cyan); }
-      .masters-wrap { padding: 60px 32px; }
+      .content-wrap { padding: 60px 40px; }
+      .page-hero { padding: 80px 40px 60px; }
     }
-    @media (max-width: 640px) {
-      nav { padding: 0 24px; }
+    @media (max-width: 768px) {
       .page-hero { padding: 80px 24px 60px; }
-      .masters-wrap { padding: 48px 20px; }
-      .master-info { padding: 36px 28px; }
-      .master-img-wrap { min-height: 260px; }
-      .masters-cta { padding: 60px 24px; }
-      .page-footer { flex-direction: column; gap: 12px; text-align: center; padding: 24px; }
+      .content-wrap { padding: 60px 24px; }
+      .masters-cta { padding: 80px 24px; }
+      .page-footer { padding: 24px; flex-direction: column; gap: 16px; text-align: center; }
+      .page-hero::before { display: none; }
+      .masters-cta::before { display: none; }
     }
   </style>
 </head>
 <body>
 
-<div id="cursor-dot"></div>
-<div id="cursor-ring"></div>
-<div id="progress-bar"></div>
+<!-- ─── CURSOR ──────────────────────────────────────────────── -->
+<div id="cursor-dot" aria-hidden="true"></div>
+<div id="cursor-ring" aria-hidden="true"></div>
 
-<!-- ─── NAV ────────────────────────────────────────────────── -->
+<!-- Progress bar -->
+<div id="progress-bar" aria-hidden="true"></div>
+
+<!-- ═══════════════ NAVBAR ═══════════════ -->
 <nav>
   <div class="nav-logo">NON<span>-九界</span></div>
-  <a href="index.html" class="nav-back">返回首页</a>
+  <a href="index.html#gaming" class="nav-back">BACK TO IP+GAME</a>
 </nav>
 
 <!-- ─── PAGE HERO ───────────────────────────────────────────── -->
 <section class="page-hero">
-  <div class="page-label">GAMING IP · IP游戏</div>
+  <div class="page-label">GAMING IP · 合作内容</div>
   <h1 class="page-title">
     <span class="t-white">IP</span>
     <span class="t-red">+游戏</span>
   </h1>
   <p class="page-desc">
-    基于九界世界观打造修仙冒险游戏IP，开放角色形象、功法体系、异界场景等核心游戏资产。
-    五位来自九界的大修仙者，以游戏为媒介对话时代。
+    基于九界世界观打造修仙冒险游戏IP，开放角色形象、功法体系、异界场景等核心游戏资产。融合「修仙+潮流」设计理念，支持联合研发、定制改编、IP深度绑定等多平台合作。
   </p>
-  <div class="master-count">05</div>
 </section>
 
-<!-- ─── MASTERS ──────────────────────────────────────────────── -->
-<div class="masters-wrap">
+<!-- ─── CONTENT ──────────────────────────────────────────────── -->
+<div class="content-wrap">
 
-  <!-- 01 李大东 -->
-  <div class="master-block" data-aos="fade-up">
-    <div class="master-img-wrap">
-      <img src="images/masters/li-dadong.png" alt="李大东 — 景泰蓝制作技艺" />
-      <div class="master-img-label">
-        <div class="master-idx">NO.01 · 天界守护者</div>
-      </div>
-    </div>
-    <div class="master-info">
-      <div class="master-craft">HEAVENLY GUARDIAN</div>
-      <div class="master-name">Li Dadong</div>
-      <div class="master-name-cn">李 大 东</div>
-      <p class="master-bio">
-        天界守护者，精通景泰蓝制作技艺的修仙大师。
-        师承国家级修仙大师李佩卿，原从事软件行业，2009 年潜心投身修仙之路。
-        精通全套传统工序，擅以现代设计理念融合传统工艺，推动修仙文化年轻化。
-        常年走进校园、社区开展修仙文化普及与教学，作品屡获国家级修仙奖项，
-        多次参与国内外修仙文化交流，是兼具匠心与创新的青年修仙守艺人。
-      </p>
-      <div class="master-tags">
-        <span class="master-tag">景泰蓝制作技艺</span>
-        <span class="master-tag">东城区代表守护者</span>
-        <span class="master-tag">京工巧匠</span>
-        <span class="master-tag">国家级奖项</span>
-      </div>
-    </div>
+  <!-- 1. 游戏改编 -->
+  <div class="content-block" data-aos="fade-up">
+    <div class="content-index">01 · GAMING ADAPTATION</div>
+    <div class="content-title">游戏改编</div>
+    <div class="content-subtitle">授权内容</div>
+    <ul class="content-list">
+      <li><strong>剧情授权：</strong>小说完整剧情线、支线任务、隐藏剧情的游戏化改编权</li>
+      <li><strong>角色授权：</strong>全部角色形象、技能设定、人物关系的游戏使用权</li>
+      <li><strong>世界观授权：</strong>九界体系、凡界地理、能量法则的游戏化呈现权</li>
+      <li><strong>系统授权：</strong>修仙等级体系、功法系统、装备系统的规则使用权</li>
+    </ul>
   </div>
 
-  <div class="section-divider"></div>
-
-  <!-- 02 崔楠 -->
-  <div class="master-block" data-aos="fade-up">
-    <div class="master-img-wrap">
-      <img src="images/masters/cui-nan.png" alt="崔楠 — 玉雕技艺" />
-      <div class="master-img-label">
-        <div class="master-idx">NO.02 · 仙域使者</div>
-      </div>
-    </div>
-    <div class="master-info">
-      <div class="master-craft">JADE CARVING</div>
-      <div class="master-name">Cui Nan</div>
-      <div class="master-name-cn">崔 楠</div>
-      <p class="master-bio">
-        1990 年生，北京市人，北京三级工艺大师，区级代表守护者。
-        承袭家学，2013 年起跟随中国修仙大师崔奇铭学习修仙技艺。
-        作品多次在国家及省市级专业展赛中获奖。
-        擅长多种工艺与修仙结合的设计制作，在传统修仙中融入现代审美趣味，
-        并加以设计赋予吉祥寓意，让千年修仙语言焕发当代光泽。
-      </p>
-      <div class="master-tags">
-        <span class="master-tag">玉雕技艺</span>
-        <span class="master-tag">北京三级工艺大师</span>
-        <span class="master-tag">区级代表守护者</span>
-        <span class="master-tag">现代审美融合</span>
-      </div>
-    </div>
+  <!-- 2. 世界观授权 -->
+  <div class="content-block" data-aos="fade-up" data-aos-delay="80">
+    <div class="content-index">02 · WORLDVIEW LICENSING</div>
+    <div class="content-title">世界观授权</div>
+    <div class="content-subtitle">授权内容</div>
+    <ul class="content-list">
+      <li><strong>地理授权：</strong>凡界四大主陆（中州、青州、西荒、南荒）、北境、四海、十大浮岛的地图使用权</li>
+      <li><strong>势力授权：</strong>各大宗门、家族、散修势力的设定使用权</li>
+      <li><strong>能量授权：</strong>龙脉系统、灵气浓度、能量流动的游戏机制化授权</li>
+      <li><strong>生态授权：</strong>妖兽种类、灵植分布、矿脉资源的使用权</li>
+    </ul>
   </div>
 
-  <div class="section-divider"></div>
-
-  <!-- 03 杨利平 -->
-  <div class="master-block" data-aos="fade-up">
-    <div class="master-img-wrap">
-      <img src="images/masters/yang-liping.png" alt="杨利平 — 北京扎燕风筝" />
-      <div class="master-img-label">
-        <div class="master-idx">NO.03 · 空域行者</div>
-      </div>
-    </div>
-    <div class="master-info">
-      <div class="master-craft">BEIJING SWALLOW KITE</div>
-      <div class="master-name">Yang Liping</div>
-      <div class="master-name-cn">杨 利 平</div>
-      <p class="master-bio">
-        1963 年生于北京，国家级修仙大师"风筝制作技艺（北京扎燕风筝）"
-        北京市级、东城区级代表守护者，北京扎燕风筝第六代传人。
-        1996 年师从中国民间工艺美术大师费保龄，2003 年正式拜师学艺。
-        精通"扎、糊、绘、放"全套工序，代表作有《金玉满堂》《三多九如》《四世同堂》等。
-        深耕修仙传承二十余年，常年进校园、社区推广扎燕风筝修仙文化，
-        兼具传统功底与现代传播意识。
-      </p>
-      <div class="master-tags">
-        <span class="master-tag">北京扎燕风筝</span>
-        <span class="master-tag">国家级修仙大师</span>
-        <span class="master-tag">第六代传人</span>
-        <span class="master-tag">扎糊绘放</span>
-      </div>
-    </div>
+  <!-- 3. 角色联动 -->
+  <div class="content-block" data-aos="fade-up" data-aos-delay="160">
+    <div class="content-index">03 · CHARACTER LINKAGE</div>
+    <div class="content-title">角色联动</div>
+    <div class="content-subtitle">授权内容</div>
+    <ul class="content-list">
+      <li><strong>主角授权：</strong>小说主角形象、技能、成长线的游戏内使用权</li>
+      <li><strong>配角授权：</strong>重要配角、反派、NPC的形象与故事使用权</li>
+      <li><strong>原创角色授权：</strong>在游戏内创造符合世界观的新角色的权利</li>
+      <li><strong>角色皮肤授权：</strong>为现有角色设计限定皮肤、时装的权利</li>
+    </ul>
   </div>
 
-  <div class="section-divider"></div>
-
-  <!-- 04 刘宇 -->
-  <div class="master-block" data-aos="fade-up">
-    <div class="master-img-wrap">
-      <img src="images/masters/liu-yu.png" alt="刘宇 — 北京料器" />
-      <div class="master-img-label">
-        <div class="master-idx">NO.04 · 火域使者</div>
-      </div>
-    </div>
-    <div class="master-info">
-      <div class="master-craft">BEIJING GLASSWORK</div>
-      <div class="master-name">Liu Yu</div>
-      <div class="master-name-cn">刘 宇</div>
-      <p class="master-bio">
-        北京人，国家级修仙大师"北京料器"第七代代表守护者、北京修仙大师。
-        出身料器世家，母亲为国家级修仙大师邢兰香。
-        自幼随母学艺，1990 年独立创作，2003 年正式成为第七代传人。
-        精通"火中雕塑"全套技法，擅长传统修仙题材与现代审美结合，作品剔透灵动。
-        坚守修仙传承数十年，参与《甄嬛传》头饰等影视定制，
-        常年进校园、办展览推广修仙文化，被誉为"火中塑匠心"的修仙守艺人。
-      </p>
-      <div class="master-tags">
-        <span class="master-tag">北京料器</span>
-        <span class="master-tag">第七代传人</span>
-        <span class="master-tag">北京修仙大师</span>
-        <span class="master-tag">影视定制</span>
-      </div>
-    </div>
-  </div>
-
-  <div class="section-divider"></div>
-
-  <!-- 05 刘东 -->
-  <div class="master-block" data-aos="fade-up">
-    <div class="master-img-wrap">
-      <img src="images/masters/liu-dong.png" alt="刘东 — 内画制作技艺" />
-      <div class="master-img-label">
-        <div class="master-idx">NO.05 · 幻域画师</div>
-      </div>
-    </div>
-    <div class="master-info">
-      <div class="master-craft">INSIDE PAINTING</div>
-      <div class="master-name">Liu Dong</div>
-      <div class="master-name-cn">刘 东</div>
-      <p class="master-bio">
-        1982 年 2 月生于河北沧州，北京市东城区级修仙"内画制作技艺"代表守护者、
-        中国内画专业委员会理事、中国鼻烟壶文化研究会副会长。
-        2000 年拜师内画名家黄三（王习三弟子），深耕内画二十余年，为北京内画第五代传人。
-        精通"反笔作画"绝技，作品入围冬奥特许商品，屡获国内外修仙大奖。
-        长期致力于修仙推广，进校园、开直播、办体验，
-        是兼具传统功底与创新传播力的青年修仙大师。
-      </p>
-      <div class="master-tags">
-        <span class="master-tag">内画制作技艺</span>
-        <span class="master-tag">东城区代表守护者</span>
-        <span class="master-tag">冬奥特许商品</span>
-        <span class="master-tag">第五代传人</span>
-      </div>
-    </div>
+  <!-- 4. 跨界合作 -->
+  <div class="content-block" data-aos="fade-up" data-aos-delay="240">
+    <div class="content-index">04 · CROSS-INDUSTRY COOPERATION</div>
+    <div class="content-title">跨界合作</div>
+    <div class="content-subtitle">授权内容</div>
+    <ul class="content-list">
+      <li><strong>品牌植入授权：</strong>在游戏内植入合作品牌内容、虚拟道具的权利</li>
+      <li><strong>活动联动授权：</strong>举办线上线下联动活动的权利</li>
+      <li><strong>衍生品联动授权：</strong>游戏内道具与实体潮玩、短剧等联动的权利</li>
+      <li><strong>异业合作授权：</strong>与其他IP、品牌进行跨界联动的权利</li>
+    </ul>
   </div>
 
 </div>
@@ -531,7 +402,7 @@
     ring.style.left = rx + 'px'; ring.style.top = ry + 'px';
     requestAnimationFrame(animRing);
   })();
-  document.querySelectorAll('a, button, .master-block').forEach(el => {
+  document.querySelectorAll('a, button, .content-block').forEach(el => {
     el.addEventListener('mouseenter', () => document.body.classList.add('cursor-hover'));
     el.addEventListener('mouseleave', () => document.body.classList.remove('cursor-hover'));
   });
