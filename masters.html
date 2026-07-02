@@ -141,6 +141,20 @@
       font-size: 15px; line-height: 1.8;
       color: rgba(245,245,240,.6);
     }
+    .map-image {
+      margin-top: 40px;
+      max-width: 100%;
+      overflow: hidden;
+      border: 1px solid rgba(245,245,240,.08);
+      border-radius: 4px;
+    }
+    .map-image img {
+      width: 100%;
+      height: auto;
+      display: block;
+      transition: transform .4s ease;
+    }
+    .map-image:hover img { transform: scale(1.02); }
 
     /* ─── CONTENT WRAP ───────────────────────────────────────── */
     .content-wrap {
@@ -311,6 +325,11 @@
     <span class="t-white">IP</span>
     <span class="t-red">+游戏</span>
   </h1>
+
+  <div class="map-image" data-aos="fade-up">
+    <img src="images/world-map.png" alt="九界全景图" />
+  </div>
+
   <p class="page-desc">
     基于九界世界观打造修仙冒险游戏IP，开放角色形象、功法体系、异界场景等核心游戏资产。融合「修仙+潮流」设计理念，支持联合研发、定制改编、IP深度绑定等多平台合作。
   </p>
