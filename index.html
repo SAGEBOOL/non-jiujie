@@ -126,7 +126,30 @@
       to   { transform: translateX(-50%); }
     }
 
-    /* ─── NAVBAR ─────────────────────────────────────────────── */
+    /* ─── HAMBURGER ──────────────────────────────────────────── */
+    .nav-hamburger {
+      display: none;
+      flex-direction: column;
+      gap: 5px;
+      cursor: pointer;
+      padding: 4px;
+      z-index: 10001;
+    }
+    .nav-hamburger span {
+      display: block;
+      width: 24px; height: 2px;
+      background: var(--white);
+      transition: transform .3s, opacity .3s;
+    }
+    .nav-hamburger.active span:nth-child(1) {
+      transform: translateY(7px) rotate(45deg);
+    }
+    .nav-hamburger.active span:nth-child(2) {
+      opacity: 0;
+    }
+    .nav-hamburger.active span:nth-child(3) {
+      transform: translateY(-7px) rotate(-45deg);
+    }
     #navbar {
       position: fixed; top: 36px; left: 0; right: 0; z-index: 700;
       padding: 0 5vw;
@@ -1457,6 +1480,19 @@
       .rv-card { padding: 24px 28px; }
     }
     @media (max-width: 768px) {
+      .nav-hamburger { display: flex; }
+      .nav-links.mobile-open {
+        display: flex; flex-direction: column;
+        position: fixed; top: 68px; left: 0; right: 0; bottom: 0;
+        background: var(--ink);
+        gap: 28px;
+        padding: 40px 20px;
+        align-items: center;
+        justify-content: flex-start;
+        z-index: 10000;
+      }
+      .nav-links.mobile-open a { font-size: 18px; letter-spacing: 4px; }
+      .nav-btns { display: none; }
       .nav-links { display: none; }
       .works-grid { grid-template-columns: 1fr 1fr; grid-auto-rows: 200px; }
       .work-card:nth-child(1) { grid-column: span 2; grid-row: span 1; }
@@ -1504,7 +1540,10 @@
 <!-- ═══════════════ NAVBAR ═══════════════ -->
 <nav id="navbar">
   <div class="nav-logo">NON<span>-九界</span></div>
-  <ul class="nav-links">
+  <div class="nav-hamburger" id="navHamburger">
+    <span></span><span></span><span></span>
+  </div>
+  <ul class="nav-links" id="navLinks">
     <li><a href="#biography">传记</a></li>
     <li><a href="#activities">试读</a></li>
     <li><a href="#partners">IP集合</a></li>
@@ -1605,8 +1644,7 @@
       <div class="pc-title">IP+游戏</div>
       <div class="pc-en">IP × GAMING</div>
       <div class="pc-desc">
-        将九界世界观与游戏机制深度融合，
-        打造修仙冒险类游戏，让玩家亲历九界穿越之旅。
+        基于九界世界观打造修仙冒险类游戏，开放角色形象、功法体系、异界场景等核心游戏资产。融合「修仙+潮流」设计理念，支持联合研发、定制改编、IP深度绑定等多平台合作。
       </div>
       <div class="pc-tags">
         <span class="pc-tag">游戏改编</span>
@@ -2042,12 +2080,12 @@
     <span class="evt-item">2026 BLOCKBUSTER REALMS</span><span class="evt-sep evt-item">◈</span>
     <span class="evt-item">九界归尘展览</span><span class="evt-sep evt-item">◈</span>
     <span class="evt-item">OPEN CALL NOW</span><span class="evt-sep evt-item">◈</span>
-    <span class="evt-item">修仙 × 潮流</span><span class="evt-sep evt-item">◈</span>
+    <span class="evt-item">IP × GAMING</span><span class="evt-sep evt-item">◈</span>
     <span class="evt-item">九界归尘</span><span class="evt-sep evt-item">◈</span>
     <span class="evt-item">2026 BLOCKBUSTER REALMS</span><span class="evt-sep evt-item">◈</span>
     <span class="evt-item">九界归尘展览</span><span class="evt-sep evt-item">◈</span>
     <span class="evt-item">OPEN CALL NOW</span><span class="evt-sep evt-item">◈</span>
-    <span class="evt-item">修仙 × 潮流</span><span class="evt-sep evt-item">◈</span>
+    <span class="evt-item">IP × GAMING</span><span class="evt-sep evt-item">◈</span>
     <span class="evt-item">九界归尘</span><span class="evt-sep evt-item">◈</span>
   </div>
 </div>
@@ -2627,6 +2665,24 @@ document.querySelectorAll('.act-filter-btn, .btn-partner, .act-link')
   if (!track) return;
   track.innerHTML += track.innerHTML; // duplicate cards
 })();
+
+// burger menu toggle
+(function(){
+  const hamburger = document.getElementById('navHamburger');
+  const navLinks  = document.getElementById('navLinks');
+  if (!hamburger || !navLinks) return;
+  hamburger.addEventListener('click', () => {
+    hamburger.classList.toggle('active');
+    navLinks.classList.toggle('mobile-open');
+  });
+  navLinks.querySelectorAll('a').forEach(a => {
+    a.addEventListener('click', () => {
+      hamburger.classList.remove('active');
+      navLinks.classList.remove('mobile-open');
+    });
+  });
+})();
+
 </script>
 </body>
 </html>
