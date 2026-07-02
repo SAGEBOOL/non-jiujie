@@ -1,0 +1,493 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>IP+短剧 | NON-九界·九界归尘</title>
+
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+SC:wght@400;700;900&display=swap" rel="stylesheet" />
+
+  <!-- AOS -->
+  <link rel="stylesheet" href="https://unpkg.com/aos@2.3.4/dist/aos.css" />
+
+  <style>
+    /* ─── KRAVITZ FONT ─────────────────────────────────────────── */
+    @font-face {
+      font-family: 'Kravitz';
+      src: url('fonts/KRAVITZ_.TTF') format('truetype');
+      font-weight: 400;
+      font-style: normal;
+      font-display: swap;
+    }
+    @font-face {
+      font-family: 'Kravitz';
+      src: url('fonts/KRAVT___.TTF') format('truetype');
+      font-weight: 300;
+      font-style: normal;
+      font-display: swap;
+    }
+    @font-face {
+      font-family: 'Kravitz';
+      src: url('fonts/KRAVET__.TTF') format('truetype');
+      font-weight: 400;
+      font-style: italic;
+      font-display: swap;
+    }
+
+    /* ─── TOKENS ─────────────────────────────────────────────── */
+    :root {
+      --red:   #FF2D20;
+      --cyan:  #00F5FF;
+      --black: #0A0A0A;
+      --ink:   #111111;
+      --white: #F5F5F0;
+      --gray:  #1A1A1A;
+      --muted: #555555;
+      --font-en: 'Kravitz', sans-serif;
+      --font-cn: 'Noto Sans SC', sans-serif;
+      --grid: 8px;
+    }
+
+    /* ─── RESET ──────────────────────────────────────────────── */
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+    body {
+      background: var(--black);
+      color: var(--white);
+      font-family: var(--font-cn);
+      line-height: 1.6;
+      cursor: none;
+      overflow-x: hidden;
+    }
+    a { color: inherit; text-decoration: none; }
+    img { display: block; max-width: 100%; }
+
+    /* ─── CURSOR ─────────────────────────────────────────────── */
+    #cursor-dot  { width: 8px; height: 8px; background: var(--red); border-radius: 50%; position: fixed; top: 0; left: 0; pointer-events: none; z-index: 9999; transform: translate(-50%,-50%); transition: width .15s, height .15s, background .15s; }
+    #cursor-ring { width: 36px; height: 36px; border: 2px solid var(--cyan); border-radius: 50%; position: fixed; top: 0; left: 0; pointer-events: none; z-index: 9998; transform: translate(-50%,-50%); transition: width .35s cubic-bezier(.17,.67,.35,1.1), height .35s cubic-bezier(.17,.67,.35,1.1), transform .12s linear, opacity .3s; opacity: .7; }
+    body.cursor-hover #cursor-dot  { width: 12px; height: 12px; }
+    body.cursor-hover #cursor-ring { width: 56px; height: 56px; border-color: var(--red); opacity: 1; }
+
+    /* ─── PROGRESS BAR ───────────────────────────────────────── */
+    #progress-bar { position: fixed; top: 0; left: 0; height: 2px; width: 0; background: linear-gradient(90deg, var(--red), var(--cyan)); z-index: 10000; transition: width .1s linear; }
+
+    /* ─── NAVBAR ─────────────────────────────────────────────── */
+    nav {
+      position: fixed; top: 0; left: 0; right: 0;
+      display: flex; align-items: center; justify-content: space-between;
+      padding: 0 48px;
+      height: 72px;
+      background: rgba(10,10,10,.92);
+      backdrop-filter: blur(12px);
+      border-bottom: 1px solid rgba(245,245,240,.06);
+      z-index: 1000;
+    }
+    .nav-logo {
+      font-family: var(--font-en);
+      font-size: 22px; letter-spacing: 2px;
+      color: var(--white);
+    }
+    .nav-logo span { color: var(--red); }
+    .nav-back {
+      display: flex; align-items: center; gap: 10px;
+      font-size: 12px; letter-spacing: 2px;
+      color: var(--cyan);
+      font-family: var(--font-en);
+      border: 1px solid rgba(0,245,255,.3);
+      padding: 8px 20px;
+      transition: background .2s, color .2s;
+    }
+    .nav-back:hover { background: var(--cyan); color: var(--black); }
+    .nav-back::before { content: '←'; font-size: 14px; }
+
+    /* ─── PAGE HERO ──────────────────────────────────────────── */
+    .page-hero {
+      margin-top: 72px;
+      padding: 100px 64px 80px;
+      border-bottom: 1px solid rgba(245,245,240,.06);
+      position: relative;
+      overflow: hidden;
+    }
+    .page-hero::before {
+      content: 'SHORT DRAMA';
+      position: absolute; right: -20px; top: 50%; transform: translateY(-50%);
+      font-family: var(--font-en);
+      font-size: clamp(80px, 14vw, 200px);
+      color: rgba(255,45,32,.05);
+      letter-spacing: -4px;
+      pointer-events: none;
+      user-select: none;
+    }
+    .page-label {
+      font-family: var(--font-en);
+      font-size: 11px; letter-spacing: 4px;
+      color: var(--cyan);
+      margin-bottom: 24px;
+    }
+    .page-title {
+      font-family: var(--font-en);
+      font-size: clamp(52px, 8vw, 120px);
+      line-height: .88;
+      font-weight: 400;
+      margin-bottom: 32px;
+    }
+    .page-title .t-white { color: var(--white); display: block; }
+    .page-title .t-red   { color: var(--red); display: block; }
+    .hero-image {
+      margin-top: 40px;
+      max-width: 100%;
+      overflow: hidden;
+      border: 1px solid rgba(245,245,240,.08);
+      border-radius: 4px;
+    }
+    .hero-image img {
+      width: 100%;
+      height: auto;
+      display: block;
+      transition: transform .4s ease;
+    }
+    .hero-image:hover img { transform: scale(1.02); }
+    .page-desc {
+      max-width: 580px;
+      margin-top: 32px;
+      font-size: 15px; line-height: 1.8;
+      color: rgba(245,245,240,.6);
+    }
+
+    /* ─── CONTENT WRAP ───────────────────────────────────────── */
+    .content-wrap {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 80px 64px;
+    }
+
+    .content-block {
+      margin-bottom: 80px;
+      border-bottom: 1px solid rgba(245,245,240,.06);
+      padding-bottom: 60px;
+    }
+    .content-block:last-child { border-bottom: none; margin-bottom: 0; }
+
+    .content-index {
+      font-family: var(--font-en);
+      font-size: 11px; letter-spacing: 3px;
+      color: var(--cyan);
+      margin-bottom: 16px;
+    }
+
+    .content-title {
+      font-size: 28px;
+      font-weight: 700;
+      margin-bottom: 20px;
+      color: var(--white);
+    }
+
+    .content-subtitle {
+      font-size: 16px;
+      color: var(--cyan);
+      margin-bottom: 24px;
+    }
+
+    .content-list {
+      list-style: none;
+      padding: 0;
+    }
+    .content-list li {
+      margin-bottom: 16px;
+      padding-left: 20px;
+      position: relative;
+      color: rgba(245,245,240,.7);
+      font-size: 14px;
+      line-height: 1.8;
+    }
+    .content-list li::before {
+      content: '';
+      position: absolute;
+      left: 0; top: 8px;
+      width: 6px; height: 6px;
+      background: var(--red);
+      border-radius: 50%;
+    }
+    .content-list li strong {
+      color: var(--white);
+      font-weight: 700;
+    }
+
+    .provided-list {
+      list-style: none;
+      padding: 0;
+      margin-top: 24px;
+    }
+    .provided-list li {
+      margin-bottom: 10px;
+      padding-left: 20px;
+      position: relative;
+      color: rgba(245,245,240,.65);
+      font-size: 14px;
+      line-height: 1.8;
+    }
+    .provided-list li::before {
+      content: '◆';
+      position: absolute;
+      left: 0;
+      color: var(--cyan);
+      font-size: 10px;
+      top: 2px;
+    }
+
+    /* ─── CTA ──────────────────────────────────────────────────── */
+    .masters-cta {
+      padding: 100px 64px;
+      text-align: center;
+      border-top: 1px solid rgba(245,245,240,.06);
+      position: relative;
+    }
+    .masters-cta::before {
+      content: 'JOIN US';
+      position: absolute;
+      top: 50%; left: 50%;
+      transform: translate(-50%, -50%);
+      font-family: var(--font-en);
+      font-size: clamp(60px, 10vw, 140px);
+      color: rgba(255,45,32,.04);
+      letter-spacing: -4px;
+      pointer-events: none;
+    }
+    .masters-cta-label {
+      font-family: var(--font-en);
+      font-size: 11px;
+      letter-spacing: 4px;
+      color: var(--cyan);
+      margin-bottom: 32px;
+    }
+    .masters-cta h2 {
+      font-size: 32px;
+      font-weight: 700;
+      margin-bottom: 16px;
+    }
+    .masters-cta em {
+      color: var(--red);
+      font-style: normal;
+    }
+    .masters-cta p {
+      max-width: 500px;
+      margin: 0 auto 32px;
+      color: rgba(245,245,240,.5);
+      font-size: 15px;
+    }
+    .btn-cta {
+      display: inline-block;
+      padding: 14px 36px;
+      background: var(--red);
+      color: var(--white);
+      font-family: var(--font-en);
+      font-size: 13px;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      border: none;
+      cursor: none;
+      transition: background .2s, transform .15s;
+    }
+    .btn-cta:hover { background: #e0281a; transform: scale(1.03); }
+
+    /* ─── FOOTER ───────────────────────────────────────────────── */
+    .page-footer {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 32px 64px;
+      border-top: 1px solid rgba(245,245,240,.06);
+      font-size: 12px;
+      color: var(--muted);
+      font-family: var(--font-en);
+      letter-spacing: 1px;
+    }
+    .page-footer a {
+      color: var(--cyan);
+      transition: color .2s;
+    }
+    .page-footer a:hover { color: var(--white); }
+
+    /* ─── RESPONSIVE ─────────────────────────────────────────── */
+    @media (max-width: 1024px) {
+      .content-wrap { padding: 60px 40px; }
+      .page-hero { padding: 80px 40px 60px; }
+    }
+    @media (max-width: 768px) {
+      .page-hero { padding: 80px 24px 60px; }
+      .content-wrap { padding: 60px 24px; }
+      .masters-cta { padding: 80px 24px; }
+      .page-footer { padding: 24px; flex-direction: column; gap: 16px; text-align: center; }
+      .page-hero::before { display: none; }
+      .masters-cta::before { display: none; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- ─── CURSOR ──────────────────────────────────────────────── -->
+<div id="cursor-dot" aria-hidden="true"></div>
+<div id="cursor-ring" aria-hidden="true"></div>
+
+<!-- Progress bar -->
+<div id="progress-bar" aria-hidden="true"></div>
+
+<!-- ═══════════════ NAVBAR ═══════════════ -->
+<nav>
+  <div class="nav-logo">NON<span>-九界</span></div>
+  <a href="index.html#flash" class="nav-back">BACK TO IP+SHORT DRAMA</a>
+</nav>
+
+<!-- ─── PAGE HERO ───────────────────────────────────────────── -->
+<section class="page-hero">
+  <div class="page-label">IP + SHORT DRAMA · 合作内容</div>
+  <h1 class="page-title">
+    <span class="t-white">IP</span>
+    <span class="t-red">+短剧</span>
+  </h1>
+
+  <div class="hero-image" data-aos="fade-up">
+    <img src="images/short-drama-hero.jpg" alt="九界归尘·短剧概念" />
+  </div>
+
+  <p class="page-desc" data-aos="fade-up" data-aos-delay="100">
+    将《九界归尘》的修仙世界观改编为短剧内容，融合影视叙事与修仙文化，打造沉浸式IP内容体验。
+  </p>
+</section>
+
+<!-- ─── CONTENT ──────────────────────────────────────────────── -->
+<div class="content-wrap">
+
+  <!-- 1. 短剧改编 -->
+  <div class="content-block" data-aos="fade-up">
+    <div class="content-index">01 · SHORT DRAMA ADAPTATION</div>
+    <div class="content-title">短剧改编</div>
+    <div class="content-subtitle">授权内容</div>
+    <ul class="content-list">
+      <li><strong>故事授权：</strong>小说主线剧情、支线故事、角色人物小传的使用权</li>
+      <li><strong>世界观授权：</strong>九界体系设定、凡界地理架构、能量法则系统的影视化改编权</li>
+      <li><strong>角色授权：</strong>主要角色形象、性格设定、人物关系的使用权</li>
+      <li><strong>台词授权：</strong>经典对白、功法口诀、世界观术语的使用权</li>
+    </ul>
+    <div style="margin-top:32px;">
+      <div style="font-size:15px;color:var(--cyan);margin-bottom:16px;font-family:var(--font-en);letter-spacing:1px;">我方提供</div>
+      <ul class="provided-list">
+        <li>完整小说原著电子版</li>
+        <li>角色设定集（含外貌描述、性格特征、成长弧线）</li>
+        <li>世界观文档（九界结构图、凡界地图、势力分布）</li>
+        <li>改编建议书（核心情节提炼、高光场景推荐）</li>
+      </ul>
+    </div>
+  </div>
+
+  <!-- 2. 影视制作 -->
+  <div class="content-block" data-aos="fade-up" data-aos-delay="80">
+    <div class="content-index">02 · FILM & TV PRODUCTION</div>
+    <div class="content-title">影视制作</div>
+    <div class="content-subtitle">授权内容</div>
+    <ul class="content-list">
+      <li><strong>视觉资产授权：</strong>角色原画、场景概念图、服装设计稿的影视化使用权</li>
+      <li><strong>音乐音效授权：</strong>主题曲、背景音乐、音效素材的使用权（如有）</li>
+      <li><strong>品牌标识授权：</strong>LOGO、字体、视觉VI系统的使用权</li>
+    </ul>
+    <div style="margin-top:32px;">
+      <div style="font-size:15px;color:var(--cyan);margin-bottom:16px;font-family:var(--font-en);letter-spacing:1px;">我方提供</div>
+      <ul class="provided-list">
+        <li>高清角色原画素材包（分层PSD/AI文件）</li>
+        <li>场景概念图库（凡界四大主陆、十大浮岛、四海风貌）</li>
+        <li>服装/道具设计参考（修仙服饰、法器样式、建筑风格）</li>
+        <li>色彩规范与视觉风格指南</li>
+      </ul>
+    </div>
+  </div>
+
+  <!-- 3. 剧本开发 -->
+  <div class="content-block" data-aos="fade-up" data-aos-delay="160">
+    <div class="content-index">03 · SCRIPT DEVELOPMENT</div>
+    <div class="content-title">剧本开发</div>
+    <div class="content-subtitle">授权内容</div>
+    <ul class="content-list">
+      <li><strong>叙事框架授权：</strong>小说叙事结构、章节节奏、悬念设置方法的参考使用权</li>
+      <li><strong>角色发展授权：</strong>角色成长曲线、情感线、冲突设计的改编权</li>
+      <li><strong>世界观细节授权：</strong>修仙等级体系、功法分类、势力斗争设定的使用权</li>
+    </ul>
+    <div style="margin-top:32px;">
+      <div style="font-size:15px;color:var(--cyan);margin-bottom:16px;font-family:var(--font-en);letter-spacing:1px;">我方提供</div>
+      <ul class="provided-list">
+        <li>详细剧情大纲（含主线、支线、伏笔回收节点）</li>
+        <li>角色关系图谱（人物关联、恩怨情仇、势力归属）</li>
+        <li>修仙体系文档（境界划分、功法属性、战斗规则）</li>
+        <li>高光场景清单（适合影视化的经典桥段）</li>
+      </ul>
+    </div>
+  </div>
+
+  <!-- 4. 内容分发 -->
+  <div class="content-block" data-aos="fade-up" data-aos-delay="240">
+    <div class="content-index">04 · CONTENT DISTRIBUTION</div>
+    <div class="content-title">内容分发</div>
+    <div class="content-subtitle">授权内容</div>
+    <ul class="content-list">
+      <li><strong>联合宣发授权：</strong>使用IP官方账号、粉丝社群进行联合宣传的权利</li>
+      <li><strong>二创素材授权：</strong>提供官方剪辑素材、预告片、花絮供合作方二次传播</li>
+      <li><strong>品牌联动授权：</strong>短剧与小说、游戏、潮玩等IP产品的联动宣传权</li>
+    </ul>
+    <div style="margin-top:32px;">
+      <div style="font-size:15px;color:var(--cyan);margin-bottom:16px;font-family:var(--font-en);letter-spacing:1px;">我方提供</div>
+      <ul class="provided-list">
+        <li>官方社交媒体账号矩阵（微博、抖音、B站等）</li>
+        <li>粉丝社群资源（微信群、QQ群、Discord社群）</li>
+        <li>官方预告片/海报素材包</li>
+        <li>作者/主创出镜宣传支持（视情况）</li>
+      </ul>
+    </div>
+  </div>
+
+</div>
+
+<!-- ─── CTA ──────────────────────────────────────────────────── -->
+<section class="masters-cta">
+  <div class="masters-cta-label">JOIN US · 加入我们</div>
+  <h2>成为我们的<em>IP+短剧合作伙伴</em></h2>
+  <p>加入九界，让短剧IP在影视场域中延续，找到属于修仙文化的当代语言。</p>
+  <a href="index.html#flash" class="btn-cta">了解短剧IP</a>
+</section>
+
+<!-- ─── FOOTER ───────────────────────────────────────────────── -->
+<footer class="page-footer">
+  <span>© 2026 九界归尘 · DSArt+AI STUDIO · All rights reserved.</span>
+  <a href="index.html">← 返回首页</a>
+</footer>
+
+<!-- ─── AOS ──────────────────────────────────────────────────── -->
+<script src="https://unpkg.com/aos@2.3.4/dist/aos.js"></script>
+<script>
+  AOS.init({ duration: 700, once: true, offset: 60 });
+
+  // cursor
+  const dot  = document.getElementById('cursor-dot');
+  const ring = document.getElementById('cursor-ring');
+  let mx = 0, my = 0, rx = 0, ry = 0;
+  document.addEventListener('mousemove', e => { mx = e.clientX; my = e.clientY; dot.style.left = mx + 'px'; dot.style.top = my + 'px'; });
+  (function animRing() {
+    rx += (mx - rx) * .12; ry += (my - ry) * .12;
+    ring.style.left = rx + 'px'; ring.style.top = ry + 'px';
+    requestAnimationFrame(animRing);
+  })();
+  document.querySelectorAll('a, button, .content-block').forEach(el => {
+    el.addEventListener('mouseenter', () => document.body.classList.add('cursor-hover'));
+    el.addEventListener('mouseleave', () => document.body.classList.remove('cursor-hover'));
+  });
+
+  // progress bar
+  const bar = document.getElementById('progress-bar');
+  window.addEventListener('scroll', () => {
+    const pct = window.scrollY / (document.body.scrollHeight - window.innerHeight) * 100;
+    bar.style.width = pct + '%';
+  });
+</script>
+</body>
+</html>
