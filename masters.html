@@ -156,6 +156,35 @@
     }
     .map-image:hover img { transform: scale(1.02); }
 
+    /* ─── VIDEO GRID ────────────────────────────────────────── */
+    .gaming-video-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 16px;
+      margin-top: 32px;
+    }
+    .video-card {
+      position: relative;
+      border-radius: 4px;
+      overflow: hidden;
+      border: 1px solid rgba(245,245,240,.08);
+      background: rgba(17,17,17,.6);
+    }
+    .video-card video {
+      width: 100%;
+      display: block;
+      aspect-ratio: 9/16;
+      object-fit: cover;
+    }
+    .video-card span {
+      position: absolute; top: 8px; left: 8px;
+      font-family: var(--font-en);
+      font-size: 11px; letter-spacing: 2px;
+      color: var(--red); background: rgba(10,10,10,.7);
+      padding: 2px 8px; border-radius: 2px;
+      pointer-events: none;
+    }
+
     /* ─── CONTENT WRAP ───────────────────────────────────────── */
     .content-wrap {
       max-width: 1200px;
@@ -292,6 +321,7 @@
     @media (max-width: 1024px) {
       .content-wrap { padding: 60px 40px; }
       .page-hero { padding: 80px 40px 60px; }
+      .gaming-video-grid { grid-template-columns: repeat(auto-fit, minmax(160px, 1fr)); }
     }
     @media (max-width: 768px) {
       .page-hero { padding: 80px 24px 60px; }
@@ -349,6 +379,14 @@
       <li><strong>世界观授权：</strong>九界体系、凡界地理、能量法则的游戏化呈现权</li>
       <li><strong>系统授权：</strong>修仙等级体系、功法系统、装备系统的规则使用权</li>
     </ul>
+
+    <div class="gaming-video-grid">
+      <div class="video-card"><video src="images/gaming-4.mp4" controls playsinline preload="metadata"></video><span>04</span></div>
+      <div class="video-card"><video src="images/gaming-5.mp4" controls playsinline preload="metadata"></video><span>05</span></div>
+      <div class="video-card"><video src="images/gaming-6.mp4" controls playsinline preload="metadata"></video><span>06</span></div>
+      <div class="video-card"><video src="images/gaming-7.mp4" controls playsinline preload="metadata"></video><span>07</span></div>
+      <div class="video-card"><video src="images/gaming-8.mp4" controls playsinline preload="metadata"></video><span>08</span></div>
+    </div>
   </div>
 
   <!-- 2. 世界观授权 -->
