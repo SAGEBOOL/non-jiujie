@@ -3040,13 +3040,21 @@ const CozeChat = {
         body: JSON.stringify({ message: text }),
       });
 
-      if (!res.ok) throw new Error(`HTTP ${res.status}`);
+      if (!res.ok) {
+        // Try to read error body
+        const errText = await res.text();
+        throw new Error(`HTTP ${res.status}: ${errText.substring(0, 200)}`);
+      }
 
+      // Check if response is actually SSE
+      const contentType = res.headers.get('content-type') || '';
+      
       const reader = res.body.getReader();
       const decoder = new TextDecoder();
       let buffer = '';
       let fullText = '';
       let currentEvent = '';
+      let rawResponse = '';
 
       typingEl.remove();
       typingEl = null;
@@ -3057,6 +3065,7 @@ const CozeChat = {
         if (done) break;
 
         buffer += decoder.decode(value, { stream: true });
+        rawResponse += decoder.decode(value, { stream: true });
         const lines = buffer.split('\n');
         buffer = lines.pop();
 
@@ -3082,7 +3091,11 @@ const CozeChat = {
         }
       }
 
-      if (!fullText) { streamEl.innerHTML = '抱歉，我暂时无法回答。请稍后重试。'; }
+      if (!fullText) {
+        // Show raw response for debugging
+        const preview = rawResponse.substring(0, 500);
+        streamEl.innerHTML = '抱歉，我暂时无法回答。<br><small style="color:var(--muted)">(debug: ' + preview.replace(/</g,'&lt;') + ')</small>';
+      }
     } catch (err) {
       console.error('Coze chat error:', err);
       if (typingEl) typingEl.remove();
