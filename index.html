@@ -3077,8 +3077,8 @@ const CozeChat = {
             if (!dataStr || dataStr === '[DONE]') continue;
             try {
               const data = JSON.parse(dataStr);
-              // Coze v3 SSE: content is at data.content (not data.data.content)
-              // Also handle reasoning_content (thinking process)
+              // Only show answer content, skip verbose (system/debug) events
+              if (data.type && data.type !== 'answer') continue;
               const hasContent = Object.prototype.hasOwnProperty.call(data, 'content');
               const content = hasContent ? data.content : null;
               if (content && typeof content === 'string' && content !== '') {
@@ -3087,9 +3087,7 @@ const CozeChat = {
                 document.getElementById('cozeMessages').scrollTop =
                   document.getElementById('cozeMessages').scrollHeight;
               }
-            } catch (e) {
-              console.warn('SSE parse error:', e, dataStr.substring(0, 100));
-            }
+            } catch (e) {}
           }
         }
       }
