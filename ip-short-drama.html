@@ -143,13 +143,15 @@
       border: 1px solid rgba(245,245,240,.08);
       border-radius: 4px;
     }
-    .hero-image img {
+    .hero-image img,
+    .hero-image video {
       width: 100%;
       height: auto;
       display: block;
       transition: transform .4s ease;
+      border-radius: 4px;
     }
-    .hero-image:hover img { transform: scale(1.02); }
+    .hero-image:hover img, .hero-image:hover video { transform: scale(1.02); }
     .page-desc {
       max-width: 580px;
       margin-top: 32px;
@@ -350,7 +352,7 @@
   </h1>
 
   <div class="hero-image" data-aos="fade-up">
-    <img src="images/short-drama-hero.jpg" alt="九界归尘·短剧概念" />
+    <video src="images/short-drama-trailer.mp4" alt="九界归尘·短剧概念" poster="images/short-drama-hero.jpg" controls playsinline preload="metadata"></video>
   </div>
 
   <p class="page-desc" data-aos="fade-up" data-aos-delay="100">
