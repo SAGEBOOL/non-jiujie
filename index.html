@@ -2835,10 +2835,10 @@ document.querySelectorAll('.act-filter-btn, .btn-partner, .act-link')
 </script>
 
 <!-- Coze Chat Widget (代理转发，token 不暴露在前端) -->
-<div id="coze-chat-btn" title="AI 助手">🧚🏻‍♀️</div>
+<div id="coze-chat-btn" title="AI 助手"><img src="images/coze-icon.png" alt="Coze" /></div>
 <div id="coze-chat-panel" style="display:none">
   <div class="coze-header">
-    <span>🧚🏻‍♀️ 九界 AI 助手</span>
+    <span><img src="images/coze-icon.png" style="width:20px;height:20px;border-radius:50%;vertical-align:middle;margin-right:6px;" alt="" />九界 AI 助手</span>
     <button class="coze-close" onclick="CozeChat.toggle()">&times;</button>
   </div>
   <div class="coze-messages" id="cozeMessages"></div>
@@ -2858,14 +2858,20 @@ document.querySelectorAll('.act-filter-btn, .btn-partner, .act-link')
   border-radius: 50%;
   background: linear-gradient(135deg, #FF2D20, #ff6b5b);
   color: #fff;
-  font-size: 26px;
+  font-size: 0;
   display: flex; align-items: center; justify-content: center;
   cursor: none;
   z-index: 9997;
   box-shadow: 0 4px 20px rgba(255,45,32,.4);
   transition: transform .2s, box-shadow .2s;
   border: none;
+  overflow: hidden;
   animation: cozePulse 2.5s infinite ease-in-out;
+}
+#coze-chat-btn img {
+  width: calc(100% - 4px); height: calc(100% - 4px);
+  border-radius: 50%;
+  object-fit: cover;
 }
 #coze-chat-btn:hover {
   transform: scale(1.1);
