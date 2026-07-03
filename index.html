@@ -3068,8 +3068,11 @@ const CozeChat = {
             if (!dataStr || dataStr === '[DONE]') continue;
             try {
               const data = JSON.parse(dataStr);
-              if (currentEvent === 'conversation.message.delta' && data.data?.content) {
-                fullText += data.data.content;
+              // v3 API: content may be at data.data.content or data.content
+              // Also accept any delta-like event that carries text
+              const content = data?.data?.content || data?.content || data?.choices?.[0]?.delta?.content;
+              if (content && typeof content === 'string') {
+                fullText += content;
                 streamEl.innerHTML = fullText.replace(/\n/g, '<br>');
                 document.getElementById('cozeMessages').scrollTop =
                   document.getElementById('cozeMessages').scrollHeight;
@@ -3079,7 +3082,7 @@ const CozeChat = {
         }
       }
 
-      if (!fullText) streamEl.innerHTML = '抱歉，我暂时无法回答。请稍后重试。';
+      if (!fullText) { streamEl.innerHTML = '抱歉，我暂时无法回答。请稍后重试。'; }
     } catch (err) {
       console.error('Coze chat error:', err);
       if (typingEl) typingEl.remove();
