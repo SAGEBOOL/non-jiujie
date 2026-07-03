@@ -1514,13 +1514,20 @@
       .nav-links.mobile-open {
         display: flex; flex-direction: column;
         position: fixed; top: 68px; left: 0; right: 0; bottom: 0;
-        background: var(--ink);
+        background: rgba(17,17,17,.97);
+        backdrop-filter: blur(16px);
         gap: 28px;
         padding: 40px 20px;
         align-items: center;
         justify-content: flex-start;
         z-index: 10000;
+        animation: menuSlideIn .3s ease-out;
       }
+      @keyframes menuSlideIn {
+        from { opacity: 0; transform: translateY(-10px); }
+        to   { opacity: 1; transform: translateY(0); }
+      }
+      body.menu-open { overflow: hidden; }
       .nav-links.mobile-open a { font-size: 18px; letter-spacing: 4px; }
       .nav-btns { display: none; }
       .nav-links { display: none; }
@@ -1536,6 +1543,38 @@
       .act-grid { grid-template-columns: 1fr; }
       .reviews-scroll { height: 340px; }
     }
+
+    /* ─── ANCHOR NAV ──────────────────────────────────────── */
+    .anchor-nav {
+      position: fixed; right: 20px; top: 50%; transform: translateY(-50%);
+      z-index: 800;
+      display: flex; flex-direction: column; gap: 12px;
+      opacity: 0; pointer-events: none; transition: opacity .4s;
+    }
+    .anchor-nav.visible { opacity: 1; pointer-events: auto; }
+    .anchor-dot {
+      width: 10px; height: 10px;
+      border-radius: 50%;
+      border: 1.5px solid rgba(245,245,240,.3);
+      background: transparent;
+      cursor: pointer; position: relative;
+      transition: background .25s, border-color .25s, transform .2s;
+    }
+    .anchor-dot:hover { transform: scale(1.4); border-color: var(--cyan); }
+    .anchor-dot.active { background: var(--red); border-color: var(--red); }
+    .anchor-dot::after {
+      content: attr(data-label);
+      position: absolute; right: 20px; top: 50%; transform: translateY(-50%);
+      font-size: 11px; letter-spacing: 1px; color: rgba(245,245,240,.7);
+      white-space: nowrap; padding: 4px 10px;
+      background: rgba(17,17,17,.9);
+      border: 1px solid rgba(0,245,255,.15);
+      border-radius: 4px; opacity: 0; pointer-events: none;
+      transition: opacity .2s;
+    }
+    .anchor-dot:hover::after { opacity: 1; }
+
+    @media (max-width: 1024px) { .anchor-nav { display: none; } }
     @media (max-width: 480px) {
       .works-grid { grid-template-columns: 1fr; }
       .work-card:nth-child(1),
@@ -1566,6 +1605,15 @@
 
 <!-- Progress bar -->
 <div id="progress-bar" aria-hidden="true"></div>
+
+<!-- Anchor nav -->
+<nav class="anchor-nav" id="anchorNav" aria-label="页面导航">
+  <div class="anchor-dot" data-target="#hero" data-label="首页" onclick="document.querySelector('#hero').scrollIntoView({behavior:'smooth'})"></div>
+  <div class="anchor-dot" data-target="#partners" data-label="IP集合" onclick="document.querySelector('#partners').scrollIntoView({behavior:'smooth'})"></div>
+  <div class="anchor-dot" data-target="#biography" data-label="九界传记" onclick="document.querySelector('#biography').scrollIntoView({behavior:'smooth'})"></div>
+  <div class="anchor-dot" data-target="#activities" data-label="精选试读" onclick="document.querySelector('#activities').scrollIntoView({behavior:'smooth'})"></div>
+  <div class="anchor-dot" data-target="#reviews" data-label="精选留言" onclick="document.querySelector('#reviews').scrollIntoView({behavior:'smooth'})"></div>
+</nav>
 
 <!-- ═══════════════ NAVBAR ═══════════════ -->
 <nav id="navbar">
@@ -1634,7 +1682,7 @@
     </div>
 
     <div class="hero-video" data-aos="fade-up" data-aos-delay="500">
-      <video id="heroTrailer" src="images/hero-trailer.mp4" autoplay loop playsinline></video>
+      <video id="heroTrailer" src="images/hero-trailer.mp4" autoplay loop playsinline preload="metadata"></video>
       <button id="heroMuteBtn" class="hero-mute-btn" title="静音/取消静音">🔊</button>
     </div>
   </div>
@@ -2714,20 +2762,73 @@ document.querySelectorAll('.act-filter-btn, .btn-partner, .act-link')
   track.innerHTML += track.innerHTML; // duplicate cards
 })();
 
-// burger menu toggle
+// anchor nav — scroll spy + show/hide
+(function(){
+  const nav = document.getElementById('anchorNav');
+  const dots = nav ? nav.querySelectorAll('.anchor-dot') : [];
+  if (!dots.length) return;
+
+  const sections = [
+    { id: 'hero', el: document.getElementById('hero') },
+    { id: 'partners', el: document.getElementById('partners') },
+    { id: 'biography', el: document.getElementById('biography') },
+    { id: 'activities', el: document.getElementById('activities') },
+    { id: 'reviews', el: document.getElementById('reviews') }
+  ].filter(s => s.el);
+
+  function update() {
+    const scrollY = window.scrollY + window.innerHeight * 0.35;
+    // show/hide nav
+    if (nav) nav.classList.toggle('visible', scrollY > window.innerHeight * 0.6);
+
+    let activeIdx = 0;
+    for (let i = sections.length - 1; i >= 0; i--) {
+      if (scrollY >= sections[i].el.offsetTop) { activeIdx = i; break; }
+    }
+    dots.forEach((d, i) => d.classList.toggle('active', i === activeIdx));
+  }
+
+  window.addEventListener('scroll', update, { passive: true });
+  update();
+})();
+
+// burger menu toggle — enhanced with scroll close & body lock
 (function(){
   const hamburger = document.getElementById('navHamburger');
   const navLinks  = document.getElementById('navLinks');
   if (!hamburger || !navLinks) return;
-  hamburger.addEventListener('click', () => {
-    hamburger.classList.toggle('active');
+
+  function closeMenu() {
+    hamburger.classList.remove('active');
+    navLinks.classList.remove('mobile-open');
+    document.body.classList.remove('menu-open');
+  }
+
+  function toggleMenu() {
+    const isOpen = hamburger.classList.toggle('active');
     navLinks.classList.toggle('mobile-open');
-  });
+    document.body.classList.toggle('menu-open', isOpen);
+  }
+
+  hamburger.addEventListener('click', toggleMenu);
+
+  // close on link click
   navLinks.querySelectorAll('a').forEach(a => {
-    a.addEventListener('click', () => {
-      hamburger.classList.remove('active');
-      navLinks.classList.remove('mobile-open');
-    });
+    a.addEventListener('click', closeMenu);
+  });
+
+  // close on scroll (debounced)
+  let scrollTimer;
+  window.addEventListener('scroll', () => {
+    if (navLinks.classList.contains('mobile-open')) {
+      clearTimeout(scrollTimer);
+      scrollTimer = setTimeout(closeMenu, 80);
+    }
+  }, { passive: true });
+
+  // close on escape key
+  document.addEventListener('keydown', e => {
+    if (e.key === 'Escape') closeMenu();
   });
 })();
 

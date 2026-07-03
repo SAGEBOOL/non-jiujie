@@ -468,6 +468,22 @@
     const pct = window.scrollY / (document.body.scrollHeight - window.innerHeight) * 100;
     bar.style.width = pct + '%';
   });
+
+  // lazy load videos — only load source when visible
+  (function(){
+    const videos = document.querySelectorAll('.video-card video');
+    if (!videos.length || !('IntersectionObserver' in window)) return;
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          const v = entry.target;
+          v.setAttribute('preload', 'auto');
+          observer.unobserve(v);
+        }
+      });
+    }, { rootMargin: '200px', threshold: 0 });
+    videos.forEach(v => { v.setAttribute('preload', 'none'); observer.observe(v); });
+  })();
 </script>
 </body>
 </html>
