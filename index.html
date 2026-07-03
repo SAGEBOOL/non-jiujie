@@ -367,6 +367,19 @@
       margin-top: 6px;
     }
 
+    /* hero video */
+    .hero-video {
+      margin-top: 40px;
+      width: 100%;
+      border: 1px solid rgba(255,45,32,.3);
+      overflow: hidden;
+    }
+    .hero-video video {
+      width: 100%;
+      height: auto;
+      display: block;
+    }
+
     .hero-cta { display: flex; gap: 16px; align-items: center; }
     .btn-primary {
       font-family: var(--font-en);
@@ -1601,6 +1614,10 @@
         <div class="counter-num"><span id="c4">0</span></div>
         <div class="counter-label">修行境界</div>
       </div>
+    </div>
+
+    <div class="hero-video" data-aos="fade-up" data-aos-delay="500">
+      <video src="images/hero-trailer.mp4" autoplay muted loop playsinline></video>
     </div>
   </div>
 
