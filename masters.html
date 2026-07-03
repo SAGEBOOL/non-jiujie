@@ -158,8 +158,8 @@
 
     /* ─── VIDEO GRID ────────────────────────────────────────── */
     .gaming-video-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      display: flex;
+      flex-direction: column;
       gap: 16px;
       margin-top: 32px;
     }
@@ -321,7 +321,6 @@
     @media (max-width: 1024px) {
       .content-wrap { padding: 60px 40px; }
       .page-hero { padding: 80px 40px 60px; }
-      .gaming-video-grid { grid-template-columns: repeat(auto-fit, minmax(160px, 1fr)); }
     }
     @media (max-width: 768px) {
       .page-hero { padding: 80px 24px 60px; }
