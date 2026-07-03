@@ -3019,6 +3019,7 @@ const CozeChat = {
     div.innerHTML = text.replace(/\n/g, '<br>');
     container.appendChild(div);
     container.scrollTop = container.scrollHeight;
+    return div;
   },
 
   async send() {
@@ -3035,7 +3036,7 @@ const CozeChat = {
     input.disabled = true;
 
     // 打字中提示
-    const typingEl = this.appendMsg('bot', '思考中');
+    let typingEl = this.appendMsg('bot', '思考中');
     typingEl.classList.add('typing');
 
     try {
@@ -3049,29 +3050,49 @@ const CozeChat = {
 
       const reader = res.body.getReader();
       const decoder = new TextDecoder();
+      let buffer = '';
       let fullText = '';
-      let firstChunk = true;
+      let currentEvent = '';
 
       // 移除打字指示器，开始流式输出
       typingEl.remove();
-
-      // 创建流式消息容器
+      typingEl = null;
       const streamEl = this.appendMsg('bot', '');
 
       while (true) {
         const { done, value } = await reader.read();
         if (done) break;
 
-        const chunk = decoder.decode(value, { stream: true });
-        fullText += chunk;
-        streamEl.innerHTML = fullText.replace(/\n/g, '<br>');
-        document.getElementById('cozeMessages').scrollTop =
-          document.getElementById('cozeMessages').scrollHeight;
+        buffer += decoder.decode(value, { stream: true });
+        const lines = buffer.split('\n');
+        buffer = lines.pop();
+
+        for (const line of lines) {
+          if (line.startsWith('event:')) {
+            currentEvent = line.slice(6).trim();
+          } else if (line.startsWith('data:')) {
+            const dataStr = line.slice(5).trim();
+            if (!dataStr || dataStr === '[DONE]') continue;
+            try {
+              const data = JSON.parse(dataStr);
+              if (currentEvent === 'conversation.message.delta' && data.content) {
+                fullText += data.content;
+                streamEl.innerHTML = fullText.replace(/\n/g, '<br>');
+                document.getElementById('cozeMessages').scrollTop =
+                  document.getElementById('cozeMessages').scrollHeight;
+              }
+            } catch (e) { /* skip non-JSON */ }
+          }
+        }
+      }
+
+      if (!fullText) {
+        streamEl.innerHTML = '抱歉，我暂时无法回答。请稍后重试。';
       }
     } catch (err) {
       console.error('Coze chat error:', err);
-      typingEl.remove();
-      this.appendMsg('bot', `⚠️ 连接失败：${err.message}\n\n请检查网络后重试。`);
+      if (typingEl) typingEl.remove();
+      this.appendMsg('bot', '⚠️ 连接失败：' + err.message + '\n\n请检查网络后重试。');
     } finally {
       sendBtn.disabled = false;
       input.disabled = false;
