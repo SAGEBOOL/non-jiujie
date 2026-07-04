@@ -958,6 +958,52 @@
       align-self: flex-start; padding-top: 8px;
     }
 
+    /* 限量标签 */
+    .flash-badge {
+      position: absolute; top: 14px; left: 0;
+      font-family: var(--font-en);
+      font-size: 10px; letter-spacing: 3px; text-transform: uppercase;
+      background: var(--red); color: var(--white);
+      padding: 4px 14px 4px 10px;
+    }
+    .flash-badge.sold-out {
+      background: var(--muted);
+    }
+    .flash-badge.cyan-badge {
+      background: var(--cyan); color: var(--black);
+    }
+
+    .flash-cat {
+      font-family: var(--font-en);
+      font-size: 10px; letter-spacing: 3px; text-transform: uppercase;
+      color: var(--cyan); margin-bottom: 6px;
+    }
+    .flash-name {
+      font-size: 18px; font-weight: 700;
+      color: var(--white);
+      margin-bottom: 4px; line-height: 1.3;
+    }
+    .flash-desc {
+      font-size: 12px; line-height: 1.8;
+      color: rgba(245,245,240,.45);
+      margin-bottom: 16px;
+    }
+    .btn-flash {
+      font-family: var(--font-en);
+      font-size: 11px; letter-spacing: 2px; text-transform: uppercase;
+      padding: 9px 20px;
+      border: 1px solid var(--cyan);
+      color: var(--cyan);
+      background: transparent;
+      cursor: none;
+      transition: background .2s, color .2s;
+    }
+    .btn-flash:hover { background: var(--cyan); color: var(--black); }
+    .btn-flash.disabled {
+      border-color: var(--muted); color: var(--muted);
+      pointer-events: none;
+    }
+
     /* 商业中心快闪展示卡片 */
     .flash-mall-card {
       display: grid;
@@ -1036,12 +1082,9 @@
       margin-top: 4px;
     }
 
-    @media (max-width: 1024px) {
+    @media (max-width: 640px) {
       .flash-cta { padding: 28px 24px; }
       .flash-header { flex-direction: column; align-items: flex-start; }
-    }
-    @media (max-width: 640px) {
-      .flash-cta { padding: 24px 16px; }
     }
 
     /* ─── CLOUD TOUR IP (云游IP) ───────────────────────────── */
@@ -1486,7 +1529,7 @@
     <li><a href="#biography">传记</a></li>
     <li><a href="#activities">试读</a></li>
     <li><a href="#partners">IP集合</a></li>
-    <li><a href="javascript:void(0)" onclick="openLegal('about');return false">关于</a></li>
+    <li><a href="#" onclick="openLegal('about');return false">关于</a></li>
   </ul>
   <div class="nav-btns">
     <button class="btn-ghost" onclick="openModal('login')">登录</button>
@@ -1838,7 +1881,7 @@
         <div class="work-cat">九界传记 · Nine Realms</div>
         <div class="work-name">九界起源·古老传说篇</div>
         <div class="work-artist">作者：DSArt+AI STUDIO</div>
-        <a href="javascript:void(0)" class="work-arrow">查看详情 <svg width="16" height="10" viewBox="0 0 16 10" fill="none"><path d="M0 5h14M10 1l4 4-4 4" stroke="#FF2D20" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
+        <a href="#" class="work-arrow">查看详情 <svg width="16" height="10" viewBox="0 0 16 10" fill="none"><path d="M0 5h14M10 1l4 4-4 4" stroke="#FF2D20" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
       </div>
     </div>
 
@@ -1855,7 +1898,7 @@
         <div class="work-cat">虚空界 · Void Realm</div>
         <div class="work-name">虚空裂变·起源篇</div>
         <div class="work-artist">作者：DSArt+AI STUDIO</div>
-        <a href="javascript:void(0)" class="work-arrow">查看详情 <svg width="16" height="10" viewBox="0 0 16 10" fill="none"><path d="M0 5h14M10 1l4 4-4 4" stroke="#FF2D20" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
+        <a href="#" class="work-arrow">查看详情 <svg width="16" height="10" viewBox="0 0 16 10" fill="none"><path d="M0 5h14M10 1l4 4-4 4" stroke="#FF2D20" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
       </div>
     </div>
 
@@ -1889,7 +1932,7 @@
         <div class="work-cat">妖界 · Demon Realm</div>
         <div class="work-name">妖族秘辛·血脉篇</div>
         <div class="work-artist">作者：DSArt+AI STUDIO</div>
-        <a href="javascript:void(0)" class="work-arrow">查看详情 <svg width="16" height="10" viewBox="0 0 16 10" fill="none"><path d="M0 5h14M10 1l4 4-4 4" stroke="#FF2D20" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
+        <a href="#" class="work-arrow">查看详情 <svg width="16" height="10" viewBox="0 0 16 10" fill="none"><path d="M0 5h14M10 1l4 4-4 4" stroke="#FF2D20" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
       </div>
     </div>
 
@@ -1906,7 +1949,7 @@
         <div class="work-cat">魔界 · Devil Realm</div>
         <div class="work-name">魔焰滔天·堕落篇</div>
         <div class="work-artist">艺术家：DSArt+AI STUDIO</div>
-        <a href="javascript:void(0)" class="work-arrow">查看详情 <svg width="16" height="10" viewBox="0 0 16 10" fill="none"><path d="M0 5h14M10 1l4 4-4 4" stroke="#FF2D20" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
+        <a href="#" class="work-arrow">查看详情 <svg width="16" height="10" viewBox="0 0 16 10" fill="none"><path d="M0 5h14M10 1l4 4-4 4" stroke="#FF2D20" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
       </div>
     </div>
 
@@ -1923,7 +1966,7 @@
         <div class="work-cat">蛮荒界 · Wilderness Realm</div>
         <div class="work-name">蛮荒兽潮·生存篇</div>
         <div class="work-artist">艺术家：DSArt+AI STUDIO</div>
-        <a href="javascript:void(0)" class="work-arrow">查看详情 <svg width="16" height="10" viewBox="0 0 16 10" fill="none"><path d="M0 5h14M10 1l4 4-4 4" stroke="#FF2D20" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
+        <a href="#" class="work-arrow">查看详情 <svg width="16" height="10" viewBox="0 0 16 10" fill="none"><path d="M0 5h14M10 1l4 4-4 4" stroke="#FF2D20" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
       </div>
     </div>
 
@@ -1940,7 +1983,7 @@
         <div class="work-cat">灵界 · Spirit Realm</div>
         <div class="work-name">灵体归位·轮回篇</div>
         <div class="work-artist">艺术家：DSArt+AI STUDIO</div>
-        <a href="javascript:void(0)" class="work-arrow">查看详情 <svg width="16" height="10" viewBox="0 0 16 10" fill="none"><path d="M0 5h14M10 1l4 4-4 4" stroke="#FF2D20" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
+        <a href="#" class="work-arrow">查看详情 <svg width="16" height="10" viewBox="0 0 16 10" fill="none"><path d="M0 5h14M10 1l4 4-4 4" stroke="#FF2D20" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
       </div>
     </div>
 
@@ -1957,7 +2000,7 @@
         <div class="work-cat">仙界 · Immortal Realm</div>
         <div class="work-name">仙道永恒·飞升篇</div>
         <div class="work-artist">艺术家：DSArt+AI STUDIO</div>
-        <a href="javascript:void(0)" class="work-arrow">查看详情 <svg width="16" height="10" viewBox="0 0 16 10" fill="none"><path d="M0 5h14M10 1l4 4-4 4" stroke="#FF2D20" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
+        <a href="#" class="work-arrow">查看详情 <svg width="16" height="10" viewBox="0 0 16 10" fill="none"><path d="M0 5h14M10 1l4 4-4 4" stroke="#FF2D20" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
       </div>
     </div>
 
@@ -1974,7 +2017,7 @@
         <div class="work-cat">圣界 · Sacred Realm</div>
         <div class="work-name">圣光普照·终极篇</div>
         <div class="work-artist">艺术家：DSArt+AI STUDIO</div>
-        <a href="javascript:void(0)" class="work-arrow">查看详情 <svg width="16" height="10" viewBox="0 0 16 10" fill="none"><path d="M0 5h14M10 1l4 4-4 4" stroke="#FF2D20" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
+        <a href="#" class="work-arrow">查看详情 <svg width="16" height="10" viewBox="0 0 16 10" fill="none"><path d="M0 5h14M10 1l4 4-4 4" stroke="#FF2D20" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
       </div>
     </div>
 
@@ -1991,7 +2034,7 @@
         <div class="work-cat">铸铜 · Bronze</div>
         <div class="work-name">虚空铜铸·原初系列</div>
         <div class="work-artist">艺术家：铁工坊</div>
-        <a href="javascript:void(0)" class="work-arrow">查看详情 <svg width="16" height="10" viewBox="0 0 16 10" fill="none"><path d="M0 5h14M10 1l4 4-4 4" stroke="#FF2D20" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
+        <a href="#" class="work-arrow">查看详情 <svg width="16" height="10" viewBox="0 0 16 10" fill="none"><path d="M0 5h14M10 1l4 4-4 4" stroke="#FF2D20" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
       </div>
     </div>
 
@@ -2065,7 +2108,7 @@
         <span class="act-tag">互动体验</span>
       </div>
       <div class="act-desc">刘浪浪，天生灵根残缺却凭借毅力自创功法，是主角团中最具韧性的修行者。本篇聚焦她的修行之路与突破瓶颈的关键一战，现场设有功法互动体验区。</div>
-      <a href="javascript:void(0)" class="act-link">试读精选 <svg width="16" height="10" viewBox="0 0 16 10" fill="none"><path d="M0 5h14M10 1l4 4-4 4" stroke="#FF2D20" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
+      <a href="#" class="act-link">试读精选 <svg width="16" height="10" viewBox="0 0 16 10" fill="none"><path d="M0 5h14M10 1l4 4-4 4" stroke="#FF2D20" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
     </div>
 
     <!-- 甘道夫 -->
@@ -2083,7 +2126,7 @@
         <span class="act-tag">巡回</span>
       </div>
       <div class="act-desc">守衡者甘道夫——覆灭之世的遗孤，九界规则的最后一枚密钥。文明葬于界兽腹中，法则碎如断弦。从废墟里起身，以琴为剑，以音为引。穿行于八界的追杀与界兽的吞噬之间，护着那缕法则之火。璇玑玉衡是传承也是法则核心与九界底层系统之间的终端权限。琴音不绝，传承不灭。</div>
-      <a href="javascript:void(0)" class="act-link">试读精选 <svg width="16" height="10" viewBox="0 0 16 10" fill="none"><path d="M0 5h14M10 1l4 4-4 4" stroke="#FF2D20" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
+      <a href="#" class="act-link">试读精选 <svg width="16" height="10" viewBox="0 0 16 10" fill="none"><path d="M0 5h14M10 1l4 4-4 4" stroke="#FF2D20" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
     </div>
 
   </div><!-- /act-grid -->
@@ -2130,7 +2173,7 @@
     <div class="footer-col">
       <h4>Connect</h4>
       <ul>
-        <li><a href="javascript:void(0)" onclick="openLegal(about);return false">关于我们</a></li>
+        <li><a href="#" onclick="openLegal('about');return false">关于我们</a></li>
         <li>媒体资料包</li>
         <li>商务合作</li>
         <li>联系我们</li>
@@ -2148,9 +2191,9 @@
     <div class="footer-col">
       <h4>Legal</h4>
       <ul>
-        <li><a href="javascript:void(0)" onclick="openLegal('terms');return false">使用条款</a></li>
-        <li><a href="javascript:void(0)" onclick="openLegal('privacy');return false">隐私政策</a></li>
-        <li><a href="javascript:void(0)" onclick="openLegal('copyright');return false">版权声明</a></li>
+        <li><a href="#" onclick="openLegal('terms');return false">使用条款</a></li>
+        <li><a href="#" onclick="openLegal('privacy');return false">隐私政策</a></li>
+        <li><a href="#" onclick="openLegal('copyright');return false">版权声明</a></li>
       </ul>
     </div>
   </div>
