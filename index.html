@@ -1379,6 +1379,7 @@
       font-size: 32px; letter-spacing: 2px;
       margin-bottom: 8px;
       text-transform: uppercase;
+      color: var(--red);
     }
     #legal-content .legal-date {
       font-family: var(--font-en);
@@ -2175,8 +2176,8 @@
       <ul>
         <li><a href="#" onclick="openLegal('about');return false">关于我们</a></li>
         <li>媒体资料包</li>
-        <li>商务合作</li>
-        <li>联系我们</li>
+        <li><a href="#" onclick="openLegal('about');return false">商务合作</a></li>
+        <li><a href="#" onclick="openLegal('about');return false">联系我们</a></li>
         <li style="font-size:12px;margin-top:8px;"><a href="mailto:9j@storylucas.top" style="color:var(--red);text-decoration:none;">9j@storylucas.top</a></li>
         <li style="font-size:11px;color:rgba(245,245,240,.3);margin-top:4px;">北京 · 上海 · 香港</li>
       </ul>
@@ -2441,7 +2442,9 @@ const legalData = {
 
       <h3>联系我们</h3>
       <p><strong>北京 Beijing</strong><br>北京市朝阳区宇达创意中心久文路6号院19栋<br>Building 19, No.6 Jiowen Road, Yuda Creative Center, Chaoyang District, Beijing, China</p>
+      <hr style="border:none;border-top:1px solid rgba(245,245,240,.1);margin:16px 0;">
       <p><strong>上海 Shanghai</strong><br>上海市闵行区东川路800号创业园7号楼（交大闵行校区内）<br>Building 7, Venture Park, No. 800 Dongchuan Road, Minhang District, Shanghai</p>
+      <hr style="border:none;border-top:1px solid rgba(245,245,240,.1);margin:16px 0;">
       <p><strong>香港 Hong Kong</strong><br>香港九龙油麻地弥敦道480号鸿宝商业大厦3层<br>Room 2, 3/F, Hung Po Commercial Building, 480 Nathan Road, Yau Ma Tei, Kowloon, Hong Kong</p>
       <p>商务合作 · IP授权 · 展览邀约<br>Email: <a href="mailto:9j@storylucas.top" style="color:var(--red);text-decoration:none;">9j@storylucas.top</a></p>
     `
