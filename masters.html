@@ -59,17 +59,11 @@
       color: var(--white);
       font-family: var(--font-cn);
       line-height: 1.6;
-      cursor: none;
+      
       overflow-x: hidden;
     }
     a { color: inherit; text-decoration: none; }
     img { display: block; max-width: 100%; }
-
-    /* ─── CURSOR ─────────────────────────────────────────────── */
-    #cursor-dot  { width: 8px; height: 8px; background: var(--red); border-radius: 50%; position: fixed; top: 0; left: 0; pointer-events: none; z-index: 9999; transform: translate(-50%,-50%); transition: width .15s, height .15s, background .15s; }
-    #cursor-ring { width: 36px; height: 36px; border: 2px solid var(--cyan); border-radius: 50%; position: fixed; top: 0; left: 0; pointer-events: none; z-index: 9998; transform: translate(-50%,-50%); transition: width .35s cubic-bezier(.17,.67,.35,1.1), height .35s cubic-bezier(.17,.67,.35,1.1), transform .12s linear, opacity .3s; opacity: .7; }
-    body.cursor-hover #cursor-dot  { width: 12px; height: 12px; }
-    body.cursor-hover #cursor-ring { width: 56px; height: 56px; border-color: var(--red); opacity: 1; }
 
     /* ─── PROGRESS BAR ───────────────────────────────────────── */
     #progress-bar { position: fixed; top: 0; left: 0; height: 2px; width: 0; background: linear-gradient(90deg, var(--red), var(--cyan)); z-index: 10000; transition: width .1s linear; }
@@ -303,7 +297,7 @@
       letter-spacing: 2px;
       text-transform: uppercase;
       border: none;
-      cursor: none;
+      
       transition: background .2s, transform .15s;
     }
     .btn-cta:hover { background: #e0281a; transform: scale(1.03); }
@@ -344,9 +338,6 @@
 <body>
 
 <!-- ─── CURSOR ──────────────────────────────────────────────── -->
-<div id="cursor-dot" aria-hidden="true"></div>
-<div id="cursor-ring" aria-hidden="true"></div>
-
 <!-- Progress bar -->
 <div id="progress-bar" aria-hidden="true"></div>
 
@@ -465,21 +456,6 @@
 <script>
   AOS.init({ duration: 700, once: true, offset: 60 });
 
-  // cursor
-  const dot  = document.getElementById('cursor-dot');
-  const ring = document.getElementById('cursor-ring');
-  let mx = 0, my = 0, rx = 0, ry = 0;
-  document.addEventListener('mousemove', e => { mx = e.clientX; my = e.clientY; dot.style.left = mx + 'px'; dot.style.top = my + 'px'; });
-  (function animRing() {
-    rx += (mx - rx) * .12; ry += (my - ry) * .12;
-    ring.style.left = rx + 'px'; ring.style.top = ry + 'px';
-    requestAnimationFrame(animRing);
-  })();
-  document.querySelectorAll('a, button, .content-block').forEach(el => {
-    el.addEventListener('mouseenter', () => document.body.classList.add('cursor-hover'));
-    el.addEventListener('mouseleave', () => document.body.classList.remove('cursor-hover'));
-  });
-
   // progress bar
   const bar = document.getElementById('progress-bar');
   window.addEventListener('scroll', () => {
@@ -503,5 +479,6 @@
     videos.forEach(v => { v.setAttribute('preload', 'none'); observer.observe(v); });
   })();
 </script>
+  <script src="js/splash-cursor.js"></script>
 </body>
 </html>

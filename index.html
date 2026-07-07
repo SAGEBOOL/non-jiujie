@@ -58,37 +58,11 @@
       background: var(--black);
       color: var(--white);
       font-family: var(--font-cn);
-      cursor: none;
+      
       overflow-x: hidden;
     }
     a { text-decoration: none; color: inherit; }
     img { display: block; max-width: 100%; }
-
-    /* ─── CUSTOM CURSOR ──────────────────────────────────────── */
-    #cursor-outer {
-      position: fixed; top: 0; left: 0; z-index: 9999;
-      width: 40px; height: 40px;
-      border: 2px solid var(--cyan);
-      border-radius: 50%;
-      pointer-events: none;
-      transform: translate(-50%,-50%);
-      transition: width .2s, height .2s, border-color .2s, background .1s;
-      mix-blend-mode: exclusion;
-    }
-    #cursor-inner {
-      position: fixed; top: 0; left: 0; z-index: 10000;
-      width: 8px; height: 8px;
-      background: var(--red);
-      border-radius: 50%;
-      pointer-events: none;
-      transform: translate(-50%,-50%);
-      transition: transform .08s;
-    }
-    body.cursor-hover #cursor-outer {
-      width: 60px; height: 60px;
-      border-color: var(--red);
-      background: rgba(255,45,32,.08);
-    }
 
     /* ─── PROGRESS BAR ───────────────────────────────────────── */
     #progress-bar {
@@ -196,7 +170,7 @@
       border: 1px solid rgba(245,245,240,.35);
       color: var(--white);
       background: transparent;
-      cursor: none;
+      
       transition: border-color .2s, color .2s;
     }
     .btn-ghost:hover { border-color: var(--cyan); color: var(--cyan); }
@@ -207,7 +181,7 @@
       background: var(--red);
       color: var(--white);
       border: none;
-      cursor: none;
+      
       transition: background .2s, transform .15s;
     }
     .btn-solid:hover { background: #e0281a; transform: scale(1.03); }
@@ -394,7 +368,7 @@
       background: var(--red);
       color: var(--white);
       border: none;
-      cursor: none;
+      
       position: relative;
       overflow: hidden;
       transition: transform .2s;
@@ -417,7 +391,7 @@
       border: 1px solid var(--cyan);
       color: var(--cyan);
       background: transparent;
-      cursor: none;
+      
       transition: background .2s, color .2s;
       min-width: 170px; text-align: center;
       display: inline-flex; justify-content: center; align-items: center;
@@ -475,7 +449,7 @@
     .work-card {
       position: relative;
       overflow: hidden;
-      cursor: none;
+      
       background: var(--gray);
       group: true;
     }
@@ -742,7 +716,7 @@
       border: 1px solid rgba(245,245,240,.2);
       display: flex; align-items: center; justify-content: center;
       font-size: 13px;
-      cursor: none;
+      
       transition: border-color .2s, background .2s;
     }
     .soc-btn:hover { border-color: var(--cyan); background: rgba(0,245,255,.06); }
@@ -756,7 +730,7 @@
     .footer-col li {
       font-size: 13px; color: rgba(245,245,240,.4);
       margin-bottom: 12px;
-      cursor: none;
+      
       transition: color .2s;
     }
     .footer-col li:hover { color: var(--cyan); }
@@ -791,7 +765,7 @@
       border: 1px solid rgba(245,245,240,.12);
       color: var(--muted);
       background: transparent;
-      cursor: none;
+      
       transition: background .2s, color .2s, border-color .2s;
       margin-right: -1px;
     }
@@ -995,7 +969,7 @@
       border: 1px solid var(--cyan);
       color: var(--cyan);
       background: transparent;
-      cursor: none;
+      
       transition: background .2s, color .2s;
     }
     .btn-flash:hover { background: var(--cyan); color: var(--black); }
@@ -1109,7 +1083,7 @@
     .bazaar-card {
       background: var(--gray);
       position: relative; overflow: hidden;
-      cursor: none;
+      
       transition: background .3s;
     }
     .bazaar-card:hover { background: #1e1e1e; }
@@ -1232,7 +1206,7 @@
       background: transparent;
       border: 2px solid var(--cyan);
       color: var(--cyan);
-      cursor: none;
+      
       position: relative; overflow: hidden;
       transition: color .3s;
       white-space: nowrap;
@@ -1281,7 +1255,7 @@
     .modal-close {
       position: absolute; top: 16px; right: 20px;
       font-size: 22px; color: var(--muted);
-      cursor: none; transition: color .2s;
+       transition: color .2s;
     }
     .modal-close:hover { color: var(--red); }
     .modal-tabs {
@@ -1292,7 +1266,7 @@
       font-family: var(--font-en);
       font-size: 14px; letter-spacing: 2px; text-transform: uppercase;
       padding: 10px 24px;
-      cursor: none;
+      
       color: var(--muted);
       border-bottom: 2px solid transparent;
       margin-bottom: -1px;
@@ -1324,7 +1298,7 @@
       font-size: 14px; letter-spacing: 3px; text-transform: uppercase;
       padding: 14px;
       background: var(--red); color: var(--white);
-      border: none; cursor: none;
+      border: none; 
       transition: background .2s;
     }
     .form-submit:hover { background: #e0281a; }
@@ -1369,7 +1343,7 @@
     .legal-close {
       position: sticky; top: 0; float: right;
       font-size: 28px; background: none; border: none;
-      color: var(--muted); cursor: none;
+      color: var(--muted); 
       transition: color .2s;
       z-index: 1;
     }
@@ -1503,11 +1477,6 @@
 
 <!-- Grain overlay -->
 <div class="grain" aria-hidden="true"></div>
-
-<!-- Custom cursor -->
-<div id="cursor-outer" aria-hidden="true"></div>
-<div id="cursor-inner" aria-hidden="true"></div>
-
 <!-- Progress bar -->
 <div id="progress-bar" aria-hidden="true"></div>
 
@@ -2482,28 +2451,6 @@ document.addEventListener('keydown', function(e) {
   if (e.key === 'Escape') closeLegal();
 });
 
-// ── Custom cursor ──
-const outer = document.getElementById('cursor-outer');
-const inner = document.getElementById('cursor-inner');
-let mx = 0, my = 0, ox = 0, oy = 0;
-document.addEventListener('mousemove', e => {
-  mx = e.clientX; my = e.clientY;
-  inner.style.left = mx + 'px';
-  inner.style.top  = my + 'px';
-});
-(function raf() {
-  ox += (mx - ox) * 0.12;
-  oy += (my - oy) * 0.12;
-  outer.style.left = ox + 'px';
-  outer.style.top  = oy + 'px';
-  requestAnimationFrame(raf);
-})();
-document.querySelectorAll('a, button, .work-card, .partner-cat, .logo-slot, .soc-btn, .modal-close, .modal-tab, .form-submit, [onclick]')
-  .forEach(el => {
-    el.addEventListener('mouseenter', () => document.body.classList.add('cursor-hover'));
-    el.addEventListener('mouseleave', () => document.body.classList.remove('cursor-hover'));
-  });
-
 // ── Progress bar ──
 const bar = document.getElementById('progress-bar');
 window.addEventListener('scroll', () => {
@@ -2575,12 +2522,6 @@ function filterAct(btn, status) {
     card.style.display = show ? '' : 'none';
   });
 }
-// cursor hover extras
-document.querySelectorAll('.act-filter-btn, .btn-partner, .act-link')
-  .forEach(el => {
-    el.addEventListener('mouseenter', () => document.body.classList.add('cursor-hover'));
-    el.addEventListener('mouseleave', () => document.body.classList.remove('cursor-hover'));
-  });
 // ── Flash countdown ──
 (function(){
   const end = new Date('2026-08-31T23:59:59').getTime();
@@ -2754,7 +2695,7 @@ document.querySelectorAll('.act-filter-btn, .btn-partner, .act-link')
   color: #fff;
   font-size: 0;
   display: flex; align-items: center; justify-content: center;
-  cursor: none;
+  
   z-index: 9997;
   box-shadow: 0 4px 20px rgba(255,45,32,.4);
   transition: transform .2s, box-shadow .2s;
@@ -2798,7 +2739,7 @@ document.querySelectorAll('.act-filter-btn, .btn-partner, .act-link')
 }
 .coze-close {
   background: none; border: none; color: var(--muted); font-size: 22px;
-  cursor: none; line-height: 1; padding: 2px 6px;
+   line-height: 1; padding: 2px 6px;
   transition: color .2s;
 }
 .coze-close:hover { color: var(--red); }
@@ -2857,7 +2798,7 @@ document.querySelectorAll('.act-filter-btn, .btn-partner, .act-link')
   background: var(--red);
   color: #fff; border: none; border-radius: 10px;
   padding: 9px 18px; font-size: 13px; font-weight: 600;
-  cursor: none; transition: background .2s;
+   transition: background .2s;
 }
 .coze-input-wrap button:hover { background: #e0281a; }
 .coze-input-wrap button:disabled { opacity: .45; cursor: not-allowed; }
@@ -2889,8 +2830,6 @@ const CozeChat = {
     setTimeout(() => {
       this.appendMsg('bot', '你好！我是九界 AI 助手 🌟\n\n可以问我关于《九界归尘》的任何问题——世界观、角色、剧情、IP合作等。');
     }, 400);
-    btn.addEventListener('mouseenter', () => document.body.classList.add('cursor-hover'));
-    btn.addEventListener('mouseleave', () => document.body.classList.remove('cursor-hover'));
   },
 
   toggle() {
@@ -3004,5 +2943,6 @@ const CozeChat = {
 CozeChat.init();
 </script>
 
+  <script src="js/splash-cursor.js"></script>
 </body>
 </html>

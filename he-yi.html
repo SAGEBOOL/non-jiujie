@@ -57,38 +57,12 @@
       background: var(--black);
       color: var(--white);
       font-family: var(--font-cn);
-      cursor: none;
+      
       overflow-x: hidden;
       line-height: 1.8;
     }
     a { text-decoration: none; color: inherit; }
     img { display: block; max-width: 100%; }
-
-    /* ─── CUSTOM CURSOR ──────────────────────────────────────── */
-    #cursor-outer {
-      position: fixed; top: 0; left: 0; z-index: 9999;
-      width: 40px; height: 40px;
-      border: 2px solid var(--cyan);
-      border-radius: 50%;
-      pointer-events: none;
-      transform: translate(-50%,-50%);
-      transition: width .2s, height .2s, border-color .2s, background .1s;
-      mix-blend-mode: exclusion;
-    }
-    #cursor-inner {
-      position: fixed; top: 0; left: 0; z-index: 10000;
-      width: 8px; height: 8px;
-      background: var(--red);
-      border-radius: 50%;
-      pointer-events: none;
-      transform: translate(-50%,-50%);
-      transition: transform .08s;
-    }
-    body.cursor-hover #cursor-outer {
-      width: 60px; height: 60px;
-      border-color: var(--red);
-      background: rgba(255,45,32,.08);
-    }
 
     /* ─── PROGRESS BAR ───────────────────────────────────────── */
     #progress-bar {
@@ -455,7 +429,7 @@
       letter-spacing: 3px;
       text-transform: uppercase;
       transition: all .3s;
-      cursor: none;
+      
     }
     .back-btn:hover {
       background: var(--cyan);
@@ -503,11 +477,6 @@
 
 <!-- PROGRESS BAR -->
 <div id="progress-bar"></div>
-
-<!-- CUSTOM CURSOR -->
-<div id="cursor-outer"></div>
-<div id="cursor-inner"></div>
-
 <!-- NAVBAR -->
 <nav id="navbar">
   <a href="index.html" class="nav-logo">NON-<span>九界</span></a>
@@ -669,25 +638,7 @@
 <script>
   AOS.init({duration:700,offset:60,easing:'ease-out-cubic',once:true});
 
-  /* ─── Custom Cursor ─── */
-  const outer = document.getElementById('cursor-outer');
-  const inner = document.getElementById('cursor-inner');
-  let mx=0,my=0,ox=0,oy=0;
-
-  document.addEventListener('mousemove',e=>{
-    mx=e.clientX; my=e.clientY;
-    inner.style.left=mx+'px'; inner.style.top=my+'px';
-  });
-  (function anim(){
-    ox+=(mx-ox)*.15; oy+=(my-oy)*.15;
-    outer.style.left=ox+'px'; outer.style.top=oy+'px';
-    requestAnimationFrame(anim);
-  })();
-
-  document.querySelectorAll('a,button,.char-card').forEach(el=>{
-    el.addEventListener('mouseenter',()=>document.body.classList.add('cursor-hover'));
-    el.addEventListener('mouseleave',()=>document.body.classList.remove('cursor-hover'));
-  });
+  
 
   /* ─── Progress Bar ─── */
   window.addEventListener('scroll',()=>{
@@ -696,5 +647,6 @@
   });
 </script>
 
+  <script src="js/splash-cursor.js"></script>
 </body>
 </html>
