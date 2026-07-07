@@ -5,7 +5,9 @@
  *
  * Config (mirrors the component props):
  *   RAINBOW_MODE = true  -> cycling rainbow fluid (signature look)
- *   RAINBOW_MODE = false -> uses COLOR as the single fluid color
+ *   RAINBOW_MODE = false -> cycles through BRAND_COLORS (brand palette)
+ *
+ * Brand palette for NON-九界: 青 #00F5FF / 红 #FF2D20
  */
 (function () {
   'use strict';
@@ -25,8 +27,9 @@
     const COLOR_UPDATE_SPEED = 10;
     const BACK_COLOR = { r: 0.5, g: 0, b: 0 };
     const TRANSPARENT = true;
-    const RAINBOW_MODE = true;
+    const RAINBOW_MODE = false;
     const COLOR = '#ff0000';
+    const BRAND_COLORS = ['#00F5FF', '#FF2D20']; // 青 / 红 — NON-九界 品牌色
 
     // Build the fixed overlay container + canvas (replaces the React JSX render).
     const container = document.createElement('div');
@@ -72,8 +75,11 @@
       BACK_COLOR,
       TRANSPARENT,
       RAINBOW_MODE,
-      COLOR
+      COLOR,
+      BRAND_COLORS
     };
+
+    let brandColorIndex = 0;
 
     let pointers = [new pointerPrototype()];
 
@@ -907,14 +913,17 @@
     }
 
     function generateColor() {
-      if (!config.RAINBOW_MODE) {
-        return hexToRGB(config.COLOR);
+      if (config.RAINBOW_MODE) {
+        let c = HSVtoRGB(Math.random(), 1.0, 1.0);
+        c.r *= 0.15;
+        c.g *= 0.15;
+        c.b *= 0.15;
+        return c;
       }
-      let c = HSVtoRGB(Math.random(), 1.0, 1.0);
-      c.r *= 0.15;
-      c.g *= 0.15;
-      c.b *= 0.15;
-      return c;
+      // Brand palette mode: cycle through BRAND_COLORS (青/红).
+      const hex = config.BRAND_COLORS[brandColorIndex % config.BRAND_COLORS.length];
+      brandColorIndex++;
+      return hexToRGB(hex);
     }
 
     function HSVtoRGB(h, s, v) {
