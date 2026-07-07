@@ -162,7 +162,7 @@
     }
     .nav-links a:hover { color: var(--cyan); }
     .nav-links a:hover::after { width: 100%; }
-    /* StarBorder effect on top nav items (React Bits port, brand cyan) */
+    /* StarBorder effect on top nav items — brand cyan(top)+red(bottom) running light, head-to-tail */
     .nav-links a.star-border-container {
       display: inline-block;
       position: relative;
@@ -172,26 +172,30 @@
       text-decoration: none;
     }
     .nav-links a.star-border-container::after { display: none; }
-    .nav-links a.star-border-container .border-gradient-bottom,
-    .nav-links a.star-border-container .border-gradient-top {
+    .nav-links a.star-border-container .border-gradient-top,
+    .nav-links a.star-border-container .border-gradient-bottom {
       position: absolute;
-      opacity: 0.7;
-      width: 300%;
-      height: 50%;
-      border-radius: 50%;
-      z-index: 0;
+      left: 0; right: 0;
+      height: 3px;
+      z-index: 2;
       pointer-events: none;
-      animation: 5s linear infinite alternate;
+      border-radius: inherit;
+      background-repeat: repeat-x;
+      background-size: 160px 100%;
+      animation: nav-streak 2.2s linear infinite;
+    }
+    .nav-links a.star-border-container .border-gradient-top {
+      top: 0;
+      background-image: repeating-linear-gradient(90deg,
+        transparent 0, transparent 60px,
+        #00F5FF 72px, transparent 84px, transparent 160px);
     }
     .nav-links a.star-border-container .border-gradient-bottom {
-      bottom: -12px; right: -250%;
-      background: radial-gradient(circle, #FF2D20, transparent 10%);
-      animation-name: star-movement-bottom;
-    }
-    .nav-links a.star-border-container .border-gradient-top {
-      top: -12px; left: -250%;
-      background: radial-gradient(circle, #00F5FF, transparent 10%);
-      animation-name: star-movement-top;
+      bottom: 0;
+      background-image: repeating-linear-gradient(90deg,
+        transparent 0, transparent 60px,
+        #FF2D20 72px, transparent 84px, transparent 160px);
+      animation-name: nav-streak-rev;
     }
     .nav-links a.star-border-container .inner-content {
       position: relative;
@@ -209,13 +213,13 @@
       border-color: rgba(0, 245, 255, .6);
       background: rgba(0, 245, 255, .08);
     }
-    @keyframes star-movement-bottom {
-      0%   { transform: translate(0%, 0%);   opacity: 1; }
-      100% { transform: translate(-100%, 0%); opacity: 0; }
+    @keyframes nav-streak {
+      from { background-position-x: 0; }
+      to   { background-position-x: 160px; }
     }
-    @keyframes star-movement-top {
-      0%   { transform: translate(0%, 0%);   opacity: 1; }
-      100% { transform: translate(100%, 0%); opacity: 0; }
+    @keyframes nav-streak-rev {
+      from { background-position-x: 0; }
+      to   { background-position-x: -160px; }
     }
     .nav-btns { display: flex; gap: 12px; }
     .btn-ghost {
