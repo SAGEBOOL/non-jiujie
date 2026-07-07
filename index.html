@@ -162,6 +162,61 @@
     }
     .nav-links a:hover { color: var(--cyan); }
     .nav-links a:hover::after { width: 100%; }
+    /* StarBorder effect on top nav items (React Bits port, brand cyan) */
+    .nav-links a.star-border-container {
+      display: inline-block;
+      position: relative;
+      padding: 1px 0;
+      border-radius: 14px;
+      overflow: hidden;
+      text-decoration: none;
+    }
+    .nav-links a.star-border-container::after { display: none; }
+    .nav-links a.star-border-container .border-gradient-bottom,
+    .nav-links a.star-border-container .border-gradient-top {
+      position: absolute;
+      opacity: 0.7;
+      width: 300%;
+      height: 50%;
+      border-radius: 50%;
+      z-index: 0;
+      pointer-events: none;
+      animation: 5s linear infinite alternate;
+    }
+    .nav-links a.star-border-container .border-gradient-bottom {
+      bottom: -12px; right: -250%;
+      background: radial-gradient(circle, #00F5FF, transparent 10%);
+      animation-name: star-movement-bottom;
+    }
+    .nav-links a.star-border-container .border-gradient-top {
+      top: -12px; left: -250%;
+      background: radial-gradient(circle, #00F5FF, transparent 10%);
+      animation-name: star-movement-top;
+    }
+    .nav-links a.star-border-container .inner-content {
+      position: relative;
+      z-index: 1;
+      display: block;
+      padding: 7px 18px;
+      border-radius: 14px;
+      border: 1px solid rgba(0, 245, 255, .22);
+      background: rgba(0, 0, 0, .35);
+      color: rgba(245, 245, 240, .75);
+      transition: color .2s, border-color .2s, background .2s;
+    }
+    .nav-links a.star-border-container:hover .inner-content {
+      color: var(--cyan);
+      border-color: rgba(0, 245, 255, .6);
+      background: rgba(0, 245, 255, .08);
+    }
+    @keyframes star-movement-bottom {
+      0%   { transform: translate(0%, 0%);   opacity: 1; }
+      100% { transform: translate(-100%, 0%); opacity: 0; }
+    }
+    @keyframes star-movement-top {
+      0%   { transform: translate(0%, 0%);   opacity: 1; }
+      100% { transform: translate(100%, 0%); opacity: 0; }
+    }
     .nav-btns { display: flex; gap: 12px; }
     .btn-ghost {
       font-family: var(--font-en);
@@ -1496,10 +1551,10 @@
     <span></span><span></span><span></span>
   </div>
   <ul class="nav-links" id="navLinks">
-    <li><a href="#biography">九界传记</a></li>
-    <li><a href="#activities">爽文试读</a></li>
-    <li><a href="#partners">IP+集合</a></li>
-    <li><a href="#" onclick="openLegal('about');return false">关于我们</a></li>
+    <li><a href="#biography" class="star-border-container"><span class="border-gradient-bottom"></span><span class="border-gradient-top"></span><span class="inner-content">九界传记</span></a></li>
+    <li><a href="#activities" class="star-border-container"><span class="border-gradient-bottom"></span><span class="border-gradient-top"></span><span class="inner-content">爽文试读</span></a></li>
+    <li><a href="#partners" class="star-border-container"><span class="border-gradient-bottom"></span><span class="border-gradient-top"></span><span class="inner-content">IP+集合</span></a></li>
+    <li><a href="#" onclick="openLegal('about');return false" class="star-border-container"><span class="border-gradient-bottom"></span><span class="border-gradient-top"></span><span class="inner-content">关于我们</span></a></li>
   </ul>
   <div class="nav-btns">
     <button class="btn-ghost" onclick="openModal('login')">登录</button>
