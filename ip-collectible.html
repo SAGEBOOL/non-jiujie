@@ -186,26 +186,6 @@
       margin-top: 32px;
     }
 
-    /* ─── MORE IP EXTENSIONS · CircularGallery ─────────────── */
-    .more-ip-gallery {
-      margin-top: 28px;
-      height: 600px;
-      position: relative;
-    }
-    .circular-gallery {
-      width: 100%;
-      height: 100%;
-      overflow: hidden;
-      cursor: grab;
-      border-radius: 12px;
-      border: 1px solid rgba(0, 245, 255, .15);
-    }
-    .circular-gallery:active { cursor: grabbing; }
-    .circular-gallery:focus-visible { outline: 2px solid #fff; outline-offset: 4px; }
-    @media (max-width: 768px) {
-      .more-ip-gallery { height: 440px; }
-    }
-
     /* ─── CTA ──────────────────────────────────────────────── */
     .masters-cta {
       padding: 100px 64px;
@@ -414,26 +394,6 @@
 
 </div>
 
-  <!-- 5. 更多IP延伸品 -->
-  <div class="content-block" data-aos="fade-up" data-aos-delay="320">
-    <div class="content-index">05 · MORE IP EXTENSIONS</div>
-    <div class="content-title">更多IP延伸品</div>
-    <div class="content-subtitle">潮玩 · 盲盒 · 限定 · 设计师联名</div>
-    <div class="more-ip-gallery">
-      <div class="circular-gallery" id="moreIpGallery"
-           data-items='[{"image":"images/collectible/blindbox-01.png","text":"盲盒·凡界篇"},{"image":"images/collectible/blindbox-02.png","text":"盲盒·九界篇"},{"image":"images/collectible/limited-01.png","text":"周年限定"},{"image":"images/collectible/limited-02.png","text":"节日限定"},{"image":"images/collectible/designer-01.png","text":"设计师联名"},{"image":"images/collectible/designer-02.png","text":"艺术家系列"},{"image":"images/collectible/designer-03.png","text":"潮玩雕塑"},{"image":"images/collectible/designer-04.png","text":"限定手办"},{"image":"images/collectible/designer-05.png","text":"收藏雕像"},{"image":"images/collectible/designer-06.png","text":"联名款"}]'
-           data-bend="0"
-           data-text-color="#ffffff"
-           data-border-radius="0.05"
-           data-scroll-speed="1.9"
-           data-scroll-ease="0.02"
-           data-font='bold 30px "Noto Sans SC"'
-           tabindex="0"
-           role="region"
-           aria-label="更多IP延伸品画廊，使用左右方向键浏览"></div>
-    </div>
-  </div>
-
 <!-- ─── CTA ──────────────────────────────────────────────────── -->
 <section class="masters-cta">
   <div class="masters-cta-label">JOIN US · 加入我们</div>
@@ -461,7 +421,6 @@
     bar.style.width = pct + '%';
   });
 </script>
-  <script type="module" src="js/circular-gallery.js"></script>
   <script src="js/splash-cursor.js"></script>
 </body>
 </html>
