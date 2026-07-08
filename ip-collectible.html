@@ -209,10 +209,11 @@
       box-shadow: 0 12px 40px rgba(0,245,255,.12), 0 0 60px rgba(255,45,32,.06);
     }
     .merch-item img {
-      width: 100%; height: 100%; object-fit: cover;
+      width: 100%; height: 100%; object-fit: contain;
+      padding: 12px;
       display: block; transition: transform .5s ease;
     }
-    .merch-item:hover img { transform: scale(1.06); }
+    .merch-item:hover img { transform: scale(1.04); }
 
     /* Span variants for free-form layout */
     .merch-item.merch-span-2 { grid-column: span 2; aspect-ratio: 16 / 9; }
