@@ -186,6 +186,56 @@
       margin-top: 32px;
     }
 
+    /* ─── MERCH GALLERY (free-form masonry) ────────────────── */
+    .merch-gallery {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 16px;
+      margin-top: 32px;
+    }
+    .merch-item {
+      position: relative;
+      border-radius: 14px;
+      overflow: hidden;
+      background: var(--gray);
+      border: 1px solid rgba(245,245,240,.08);
+      aspect-ratio: 4 / 5;
+      cursor: pointer;
+      transition: transform .35s ease, border-color .35s, box-shadow .35s;
+    }
+    .merch-item:hover {
+      transform: translateY(-6px) scale(1.02);
+      border-color: rgba(0,245,255,.35);
+      box-shadow: 0 12px 40px rgba(0,245,255,.12), 0 0 60px rgba(255,45,32,.06);
+    }
+    .merch-item img {
+      width: 100%; height: 100%; object-fit: cover;
+      display: block; transition: transform .5s ease;
+    }
+    .merch-item:hover img { transform: scale(1.06); }
+
+    /* Span variants for free-form layout */
+    .merch-item.merch-span-2 { grid-column: span 2; aspect-ratio: 16 / 9; }
+    .merch-item.merch-tall   { grid-row: span 2; aspect-ratio: 3 / 4; }
+    .merch-item.merch-wide   { grid-column: span 3; aspect-ratio: 21 / 9; }
+
+    /* Tag overlay */
+    .merch-tag {
+      position: absolute; bottom: 0; left: 0; right: 0;
+      padding: 10px 14px;
+      font-family: var(--font-en); font-size: 11px; letter-spacing: 1.5px;
+      color: rgba(245,245,240,.8);
+      background: linear-gradient(transparent, rgba(0,0,0,.82));
+      text-transform: uppercase;
+      pointer-events: none;
+    }
+
+    @media (max-width: 768px) {
+      .merch-gallery { grid-template-columns: repeat(2, 1fr); gap: 10px; }
+      .merch-item.merch-span-2, .merch-item.merch-wide { grid-column: span 2; }
+      .merch-item.merch-tall { grid-row: span 1; aspect-ratio: 1 / 1; }
+    }
+
     /* ─── CTA ──────────────────────────────────────────────── */
     .masters-cta {
       padding: 100px 64px;
@@ -390,6 +440,63 @@
         <div style="border-radius:12px;overflow:hidden;border:1px solid rgba(0,245,255,.15);aspect-ratio:1/1;"><img src="images/collectible/designer-05.png" alt="设计师联名5" style="width:100%;height:100%;object-fit:contain;display:block;padding:12px;"></div>
       </div>
     </div>
+</div>
+
+<!-- ─── MORE IP MERCH ──────────────────────────────────────── -->
+<div class="content-block" data-aos="fade-up">
+  <div class="content-header">
+    <div class="content-label">05 · MORE IP EXTENSIONS</div>
+    <h2>更多IP<span style="color:var(--red)">延伸品</span></h2>
+    <p class="content-desc">九界宇宙 × 潮流周边 · 托特包 / 帆布袋 / 透明袋 / 棒球帽 / T恤 / 卫衣</p>
+  </div>
+
+  <div class="merch-gallery">
+    <!-- Row 1: 黄色托特(大) + 绿色Demon帆布袋(竖) -->
+    <div class="merch-item merch-span-2">
+      <img src="images/collectible/merch-tote-yellow.png" alt="9-Realms Immortal Realm 黄色托特包" loading="lazy" />
+      <span class="merch-tag">Immortal Realm · 托特包</span>
+    </div>
+    <div class="merch-item merch-tall">
+      <img src="images/collectible/merch-tote-green-demon.png" alt="Demon Realm 绿色帆布袋" loading="lazy" />
+      <span class="merch-tag">Demon Realm · 帆布袋</span>
+    </div>
+
+    <!-- Row 2: 透明袋 + 白色帆布袋 -->
+    <div class="merch-item">
+      <img src="images/collectible/merch-bag-transparent.png" alt="Demon/Spirit Realm 透明手提袋" loading="lazy" />
+      <span class="merch-tag">Spirit & Demon · 透明袋</span>
+    </div>
+    <div class="merch-item">
+      <img src="images/collectible/merch-tote-white.png" alt="9-Realms 白色帆布袋" loading="lazy" />
+      <span class="merch-tag">9-Realms · 帆布袋</span>
+    </div>
+
+    <!-- Row 3: 帽子六色拼图(宽) -->
+    <div class="merch-item merch-wide">
+      <img src="images/collectible/merch-caps-grid.png" alt="KAJU STUDIO × 9-Realms 棒球帽系列" loading="lazy" />
+      <span class="merch-tag">KAJU STUDIO × 9-Realms · 棒球帽</span>
+    </div>
+
+    <!-- Row 4: Void T恤正面 + Barbic T恤背面 -->
+    <div class="merch-item">
+      <img src="images/collectible/merch-tee-void-front.png" alt="Void Realm T恤正面" loading="lazy" />
+      <span class="merch-tag">Void Realm · T恤</span>
+    </div>
+    <div class="merch-item merch-tall">
+      <img src="images/collectible/merch-tee-barbic-back.png" alt="Barbic Realm T恤背面" loading="lazy" />
+      <span class="merch-tag">Barbic Realm · T恤</span>
+    </div>
+
+    <!-- Row 5: 卫衣(宽) + Immortal T恤背面 -->
+    <div class="merch-item merch-wide">
+      <img src="images/collectible/merch-hoodie-barbic.png" alt="Barbic Realm 卫衣背面" loading="lazy" />
+      <span class="merch-tag">Barbic Realm · 卫衣</span>
+    </div>
+    <div class="merch-item">
+      <img src="images/collectible/merch-tee-immortal-back.png" alt="Immortal Realm T恤背面竖排红字" loading="lazy" />
+      <span class="merch-tag">Immortal Realm · T恤</span>
+    </div>
+  </div>
 </div>
 
 </div>
