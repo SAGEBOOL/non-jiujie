@@ -712,13 +712,15 @@
       height: 80px;
       background: var(--gray);
       display: flex; align-items: center; justify-content: center;
-      font-family: var(--font-en);
-      font-size: 13px; letter-spacing: 2px; text-transform: uppercase;
-      color: rgba(245,245,240,.3);
-      transition: background .2s, color .2s;
+      overflow: hidden;
+      transition: background .2s, transform .2s;
       position: relative;
     }
-    .logo-slot:hover { background: #222; color: var(--white); }
+    .logo-slot img {
+      width: 100%; height: 100%; object-fit: contain;
+      padding: 4px; display: block;
+    }
+    .logo-slot:hover { background: #222; transform: scale(1.03); }
 
     /* ─── EVENTS / MARQUEE 2 ─────────────────────────────────── */
     #events {
@@ -1689,14 +1691,14 @@
 
   <!-- logo slots -->
   <div class="logos-row" data-aos="fade-up" data-aos-delay="80">
-    <div class="logo-slot">BRAND 01</div>
-    <div class="logo-slot">BRAND 02</div>
-    <div class="logo-slot">BRAND 03</div>
-    <div class="logo-slot">BRAND 04</div>
-    <div class="logo-slot">BRAND 05</div>
-    <div class="logo-slot">BRAND 06</div>
-    <div class="logo-slot">BRAND 07</div>
-    <div class="logo-slot">BRAND 08</div>
+    <div class="logo-slot"><img src="images/collectible/merch-tote-yellow.png" alt="IP延伸品 · 托特包" loading="lazy" /></div>
+    <div class="logo-slot"><img src="images/collectible/merch-tote-green-demon.png" alt="IP延伸品 · 帆布袋" loading="lazy" /></div>
+    <div class="logo-slot"><img src="images/collectible/merch-bag-transparent.png" alt="IP延伸品 · 透明袋" loading="lazy" /></div>
+    <div class="logo-slot"><img src="images/collectible/merch-tote-white.png" alt="IP延伸品 · 白色帆布袋" loading="lazy" /></div>
+    <div class="logo-slot"><img src="images/collectible/merch-caps-grid.png" alt="IP延伸品 · 棒球帽" loading="lazy" /></div>
+    <div class="logo-slot"><img src="images/collectible/merch-tee-kaj-front.png" alt="IP延伸品 · KAJU T恤" loading="lazy" /></div>
+    <div class="logo-slot"><img src="images/collectible/merch-hoodie-barbic.png" alt="IP延伸品 · 卫衣" loading="lazy" /></div>
+    <div class="logo-slot"><img src="images/collectible/merch-plush-glow.png" alt="IP延伸品 · 发光挂件" loading="lazy" /></div>
   </div><!-- /logos-row -->
 
   <!-- 成为合作伙伴 CTA -->
