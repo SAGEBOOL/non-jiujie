@@ -905,6 +905,38 @@
       transition: gap .2s;
     }
     .act-link:hover { gap: 14px; }
+
+    /* ─── SELECTED REEL (角色篇视频) ─────────────── */
+    .selected-reel {
+      margin-top: 72px;
+      position: relative;
+    }
+    .selected-reel-head {
+      display: flex; align-items: flex-end; justify-content: space-between;
+      flex-wrap: wrap; gap: 16px;
+      margin-bottom: 24px;
+    }
+    .selected-reel-title {
+      font-family: var(--font-en);
+      font-size: clamp(22px, 3vw, 36px);
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      color: var(--white);
+    }
+    .selected-reel-title em { color: var(--cyan); font-style: normal; }
+    .selected-reel-sub {
+      font-size: 12px; color: var(--muted);
+      letter-spacing: 2px; text-transform: uppercase;
+    }
+    .selected-reel-frame {
+      position: relative;
+      border: 1px solid rgba(0,245,255,.15);
+      background: var(--black);
+      overflow: hidden;
+    }
+    .selected-reel-frame video {
+      width: 100%; height: auto; display: block;
+    }
     .act-tag-row { display: flex; flex-wrap: wrap; gap: 6px; margin-bottom: 20px; }
     .act-tag {
       font-size: 10px; letter-spacing: 1px;
@@ -2179,6 +2211,18 @@
     </div>
 
   </div><!-- /act-grid -->
+
+  <!-- 角色篇视频 -->
+  <div class="selected-reel" data-aos="fade-up">
+    <div class="selected-reel-head">
+      <div class="selected-reel-title">九界<em>角色篇</em></div>
+      <div class="selected-reel-sub">CHARACTER REEL · 精选试读</div>
+    </div>
+    <div class="selected-reel-frame">
+      <video src="videos/jiejue-characters.mp4" controls playsinline preload="metadata"></video>
+    </div>
+  </div>
+
 </section>
 
 <!-- ─── 精选留言 ──────────────────────────────────────────── -->
